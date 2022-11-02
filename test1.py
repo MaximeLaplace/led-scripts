@@ -3,8 +3,19 @@ import time
 
 from rpi_ws281x import Color, PixelStrip
 
-from config import (LED_BRIGHTNESS, LED_CHANNEL, LED_COUNT, LED_DMA,
-                    LED_FREQ_HZ, LED_INVERT, LED_PIN)
+from config import (
+    LED_BRIGHTNESS,
+    LED_CHANNEL,
+    LED_COUNT,
+    LED_DMA,
+    LED_FREQ_HZ,
+    LED_INVERT,
+    LED_PIN,
+)
+
+
+def resetStrip(strip):
+    strip
 
 
 # Define functions which animate LEDs in various ways.
@@ -14,6 +25,7 @@ def colorWipe(strip, color, wait_ms=50):
         strip.setPixelColor(i, color)
         strip.show()
         time.sleep(wait_ms / 1000.0)
+
 
 def colorSegment(strip, color, startIndex, endIndex):
     for i in range(startIndex, endIndex):
@@ -58,8 +70,7 @@ def rainbowCycle(strip, wait_ms=20, iterations=5):
     """Draw rainbow that uniformly distributes itself across all pixels."""
     for j in range(256 * iterations):
         for i in range(strip.numPixels()):
-            strip.setPixelColor(i, wheel(
-                (int(i * 256 / strip.numPixels()) + j) & 255))
+            strip.setPixelColor(i, wheel((int(i * 256 / strip.numPixels()) + j) & 255))
         strip.show()
         time.sleep(wait_ms / 1000.0)
 
@@ -77,36 +88,42 @@ def theaterChaseRainbow(strip, wait_ms=50):
 
 
 # Main program logic follows:
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Process arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
+    parser.add_argument(
+        "-c", "--clear", action="store_true", help="clear the display on exit"
+    )
     args = parser.parse_args()
 
     # Create NeoPixel object with appropriate configuration.
-    strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+    strip = PixelStrip(
+        LED_COUNT,
+        LED_PIN,
+        LED_FREQ_HZ,
+        LED_DMA,
+        LED_INVERT,
+        LED_BRIGHTNESS,
+        LED_CHANNEL,
+    )
     # Intialize the library (must be called once before other functions).
     strip.begin()
 
-    print('Press Ctrl-C to quit.')
+    print("Press Ctrl-C to quit.")
     if not args.clear:
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-
         while True:
-            print('Ouais Ouais Ouais')
-            colorWipe(strip, Color(255, 0, 0))
-            time.sleep(1)
-            print('Color wipe animations.')
+            print("Color wipe animations.")
             colorWipe(strip, Color(255, 0, 0))  # Red wipe
             colorWipe(strip, Color(0, 255, 0))  # Green wipe
             colorWipe(strip, Color(0, 0, 255))  # Blue wipe
-            print('Theater chase animations.')
+            print("Theater chase animations.")
             theaterChase(strip, Color(127, 127, 127))  # White theater chase
             theaterChase(strip, Color(127, 0, 0))  # Red theater chase
             theaterChase(strip, Color(0, 0, 127))  # Blue theater chase
-            print('Rainbow animations.')
+            print("Rainbow animations.")
             rainbow(strip)
             rainbowCycle(strip)
             theaterChaseRainbow(strip)
