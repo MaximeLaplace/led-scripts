@@ -88,7 +88,21 @@ def theaterChaseRainbow(strip, wait_ms=50):
             for i in range(0, strip.numPixels(), 3):
                 strip.setPixelColor(i + q, 0)
 
-
+def strob(strip, color=Color(125,125,125), wait_ms=200, duration_s=10):
+    """stroboscope lights"""
+    current_time_s=0
+    while current_time_s<=duration_s:
+        for led in range(13,50,2):
+            strip.setPixelColor(i, color)
+        strip.show()
+        colorWipe(strip, Color(0,0,0), 0)
+        for led in range(78,115,20):
+            strip.setPixelColor(i, color)
+        strip.show()
+        colorWipe(strip, Color(0,0,0), 0)
+        current_time_s += wait_ms/1000.0
+        time.sleep(wait_ms / 1000.0)
+        
 # Main program logic follows:
 if __name__ == "__main__":
     # Process arguments
@@ -127,8 +141,9 @@ if __name__ == "__main__":
             theaterChase(strip, Color(0, 0, 127))  # Blue theater chase
             print("Rainbow animations.")
             rainbow(strip)
-            rainbowCycle(strip)
-            theaterChaseRainbow(strip)
+            print("Strobe animation.")
+            strob(strip)
+            strob(strip, Color(180,0,0))
 
     except KeyboardInterrupt:
         if args.clear:
