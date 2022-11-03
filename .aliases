@@ -1,3 +1,0 @@
-alias cdled="cd ~/Documents/led-scripts"
-alias test="sudo python3 test1.py"
-alias led="cdled && git pull && test"
