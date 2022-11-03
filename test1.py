@@ -98,12 +98,14 @@ def strob(strip, color=Color(200, 200, 200), wait_ms=50, duration_s=10):
         strip.show()
         time.sleep(wait_ms / 1000.0)
         resetStrip(strip)
+        time.sleep(wait_ms / 1000.0)
         for led in range(78, 115, 2):
             strip.setPixelColor(led, color)
         strip.show()
         time.sleep(wait_ms / 1000.0)
         resetStrip(strip)
-        current_time_s += 2 * wait_ms / 1000.0
+        time.sleep(wait_ms / 1000.0)
+        current_time_s += 4 * wait_ms / 1000.0
 
 
 # Main program logic follows:
