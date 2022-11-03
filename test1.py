@@ -95,13 +95,14 @@ def strob(strip, color=Color(125,125,125), wait_ms=200, duration_s=10):
         for led in range(13,50,2):
             strip.setPixelColor(led, color)
         strip.show()
-        colorWipe(strip, Color(0,0,0), 0)
-        for led in range(78,115,20):
+        time.sleep(wait_ms / 1000.0)
+        resetStrip(strip)
+        for led in range(78,115,2):
             strip.setPixelColor(led, color)
         strip.show()
-        colorWipe(strip, Color(0,0,0), 0)
-        current_time_s += wait_ms/1000.0
         time.sleep(wait_ms / 1000.0)
+        resetStrip(strip)
+        current_time_s += 2*wait_ms/1000.0
         
 # Main program logic follows:
 if __name__ == "__main__":
@@ -135,12 +136,6 @@ if __name__ == "__main__":
             colorWipe(strip, Color(255, 0, 0))  # Red wipe
             colorWipe(strip, Color(0, 255, 0))  # Green wipe
             colorWipe(strip, Color(0, 0, 255))  # Blue wipe
-            print("Theater chase animations.")
-            theaterChase(strip, Color(127, 127, 127))  # White theater chase
-            theaterChase(strip, Color(127, 0, 0))  # Red theater chase
-            theaterChase(strip, Color(0, 0, 127))  # Blue theater chase
-            print("Rainbow animations.")
-            rainbow(strip)
             print("Strobe animation.")
             strob(strip)
             strob(strip, Color(180,0,0))
