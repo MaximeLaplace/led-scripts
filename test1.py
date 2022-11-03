@@ -136,11 +136,9 @@ if __name__ == "__main__":
 
     try:
         while True:
-            print("Color wipe animations.")
-            colorWipe(strip, Color(255, 0, 0))  # Red wipe
-            print("Strobe animation.")
-            strob(strip)
-            strob(strip, Color(255, 0, 0))
+            print("Rainbow animations.")
+            rainbow(strip)
+            rainbowCycle(strip)
 
     except KeyboardInterrupt:
         if args.clear:
