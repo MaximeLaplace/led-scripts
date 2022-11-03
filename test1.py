@@ -15,7 +15,9 @@ from config import (
 
 
 def resetStrip(strip):
-    strip
+    for i in range(strip.numPixels()):
+        strip.setPixelColor(i, Color(0, 0, 0))
+    strip.show()
 
 
 # Define functions which animate LEDs in various ways.
