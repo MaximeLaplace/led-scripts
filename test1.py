@@ -89,7 +89,7 @@ def theaterChaseRainbow(strip, wait_ms=50):
                 strip.setPixelColor(i + q, 0)
 
 
-def strob(strip, color=Color(125, 125, 125), wait_ms=20, duration_s=10):
+def strob(strip, color=Color(200, 200, 200), wait_ms=50, duration_s=10):
     """stroboscope lights"""
     current_time_s = 0
     while current_time_s <= duration_s:
@@ -138,7 +138,7 @@ if __name__ == "__main__":
             colorWipe(strip, Color(255, 0, 0))  # Red wipe
             print("Strobe animation.")
             strob(strip)
-            strob(strip, Color(180, 0, 0))
+            strob(strip, Color(255, 0, 0))
 
     except KeyboardInterrupt:
         if args.clear:
