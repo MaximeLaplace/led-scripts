@@ -93,11 +93,11 @@ def strob(strip, color=Color(125,125,125), wait_ms=200, duration_s=10):
     current_time_s=0
     while current_time_s<=duration_s:
         for led in range(13,50,2):
-            strip.setPixelColor(i, color)
+            strip.setPixelColor(led, color)
         strip.show()
         colorWipe(strip, Color(0,0,0), 0)
         for led in range(78,115,20):
-            strip.setPixelColor(i, color)
+            strip.setPixelColor(led, color)
         strip.show()
         colorWipe(strip, Color(0,0,0), 0)
         current_time_s += wait_ms/1000.0
