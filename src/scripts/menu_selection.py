@@ -2,6 +2,7 @@ import os
 from typing import Callable
 
 import inquirer
+import pyfiglet
 from src.scripts.utils.create_inquirers import create_inquirers
 from src.scripts.utils.parse_user_inputs import parse_user_inputs
 
@@ -22,21 +23,26 @@ for key, value in after.items():
 
 def menu() -> tuple[Callable[..., None], list[str]]:
     os.system("cls" if os.name == "nt" else "clear")
+    print(pyfiglet.figlet_format("Appli    LED"))
+    print()
 
-    question_script = [
+    question_mode = [
         inquirer.List(
-            "script",
-            message="Quel script lancer ?",
+            "mode",
+            message="Quel mode lancer ?",
             choices=list(modes.keys()),
             carousel=True,
         )
     ]
-    user_inputs = inquirer.prompt(question_script)
+    user_inputs = inquirer.prompt(question_mode)
 
-    mode = modes[user_inputs["script"]]
+    mode = modes[user_inputs["mode"]]
+
+    os.system("cls" if os.name == "nt" else "clear")
+    print(pyfiglet.figlet_format(user_inputs["mode"].replace("_", "  ")))
+    print()
 
     if mode.__doc__ is not None:
-        print()
         print(mode.__doc__)
         print()
 
