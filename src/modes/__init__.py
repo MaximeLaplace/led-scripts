@@ -1,1 +1,2 @@
-from src.modes.strobo import strobo
+from .color_wipe import color_wipe
+from .strobo import strobo
