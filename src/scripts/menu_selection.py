@@ -46,7 +46,25 @@ def menu() -> tuple[Callable[..., None], list[str]]:
         print(mode.__doc__)
         print()
 
-    questions_mode = create_inquirers(mode)
+    use_default_values = False
+    if mode.__defaults__ is not None:
+        print("Des valeurs par défauts existent :")
+
+        for (argname, _), default_value in zip(
+            args[len(args) - len(mode.__defaults__) :], mode.__defaults__
+        ):
+            print(f"   {argname} : {default_value}")
+        print()
+        use_default_values = inquirer.prompt(
+            [
+                inquirer.Confirm(
+                    "default", message="Voulez-vous les utiliser ?", default=True
+                )
+            ]
+        )["default"]
+        print()
+
+    questions_mode = create_inquirers(mode, use_default_values=use_default_values)
 
     user_inputs = inquirer.prompt(questions_mode)
     parsed_inputs = parse_user_inputs(mode, user_inputs)

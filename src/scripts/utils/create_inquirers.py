@@ -59,11 +59,23 @@ def get_function_parameters(function: Callable[..., None]) -> list[tuple[str, ty
     ]
 
 
-def create_inquirers(function: Callable[..., None]) -> list[Inquirer]:
+def create_inquirers(
+    function: Callable[..., None], use_default_values: bool = False
+) -> list[Inquirer]:
     """Takes a function and returns a list of inquirers according to its parameters"""
     inquirers = []
 
-    for name, type_ in get_function_parameters(function)[1:]:
+    function_parameters = get_function_parameters(function)[1:]
+
+    if use_default_values:
+        default_values_number = len(function.__defaults__)
+        promptable_parameters = function_parameters[
+            : len(function_parameters) - default_values_number
+        ]
+    else:
+        promptable_parameters = function_parameters
+
+    for name, type_ in promptable_parameters:
         inquirer = _create_inquirer(name, type_)
         if inquirer:
             inquirers.append(inquirer)
