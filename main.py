@@ -20,7 +20,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-c", "--clear", action="store_true", help="clear the display on exit"
     )
-    args = parser.parse_args()
+    script_args = parser.parse_args()
 
     mode, args = menu()
 
@@ -40,5 +40,5 @@ if __name__ == "__main__":
             mode(strip, *args)
 
     except KeyboardInterrupt:
-        if args.clear:
+        if script_args.clear:
             reset_strip(strip)

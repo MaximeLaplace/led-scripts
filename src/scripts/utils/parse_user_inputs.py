@@ -1,9 +1,11 @@
-from typing import Callable
+from typing import Callable, Union
 
 from .create_inquirers import get_function_parameters, get_tuple_types
 
 
-def parse_user_inputs(function: Callable, user_inputs: dict[str, str]):
+def parse_user_inputs(
+    function: Callable, user_inputs: dict[str, str]
+) -> dict[str, Union[str, int, tuple]]:
     function_parameters = get_function_parameters(function)[1:]
 
     parsed_inputs = dict(user_inputs)

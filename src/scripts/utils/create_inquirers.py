@@ -31,7 +31,7 @@ INQUIRERS = {
     ),
 }
 
-Inquirer = Union[inquirer.questions.Confirm, inquirer.questions.Text]
+Inquirer = Union[type(inquirer.Confirm), type(inquirer.Text)]
 
 
 def get_tuple_types(tuple: type) -> list[str]:
@@ -52,14 +52,14 @@ def _create_inquirer(name: str, type_: Union[tuple, type]) -> Inquirer:
     )
 
 
-def get_function_parameters(function: Callable) -> list[tuple[str, type]]:
+def get_function_parameters(function: Callable[..., None]) -> list[tuple[str, type]]:
     return [
         (name, type_.annotation)
         for name, type_ in list(dict(signature(function).parameters).items())
     ]
 
 
-def create_inquirers(function: Callable) -> list[Inquirer]:
+def create_inquirers(function: Callable[..., None]) -> list[Inquirer]:
     """Takes a function and returns a list of inquirers according to its parameters"""
     inquirers = []
 

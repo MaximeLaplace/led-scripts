@@ -1,4 +1,5 @@
 import os
+from typing import Callable
 
 import inquirer
 from src.scripts.utils.create_inquirers import create_inquirers
@@ -19,7 +20,7 @@ for key, value in after.items():
         modes[key] = after[key]
 
 
-def menu():
+def menu() -> tuple[Callable[..., None], list[str]]:
     os.system("cls" if os.name == "nt" else "clear")
 
     question_script = [
