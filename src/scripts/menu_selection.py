@@ -24,7 +24,10 @@ def menu():
 
     question_script = [
         inquirer.List(
-            "script", message="Quel script lancer ?", choices=list(modes.keys())
+            "script",
+            message="Quel script lancer ?",
+            choices=list(modes.keys()),
+            carousel=True,
         )
     ]
     user_inputs = inquirer.prompt(question_script)
