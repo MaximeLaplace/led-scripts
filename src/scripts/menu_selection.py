@@ -3,7 +3,7 @@ from typing import Callable
 
 import inquirer
 import pyfiglet
-from src.scripts.utils.create_inquirers import create_inquirers
+from src.scripts.utils.create_inquirers import create_inquirers, get_function_parameters
 from src.scripts.utils.parse_user_inputs import parse_user_inputs
 
 before = globals().copy()
@@ -48,10 +48,11 @@ def menu() -> tuple[Callable[..., None], list[str]]:
 
     use_default_values = False
     if mode.__defaults__ is not None:
-        print("Des valeurs par défauts existent :")
+        print("Des valeurs par défaut existent :")
 
+        mode_params = get_function_parameters(mode)
         for (argname, _), default_value in zip(
-            args[len(args) - len(mode.__defaults__) :], mode.__defaults__
+            mode_params[len(mode_params) - len(mode.__defaults__) :], mode.__defaults__
         ):
             print(f"   {argname} : {default_value}")
         print()
