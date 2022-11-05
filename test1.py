@@ -12,12 +12,7 @@ from config import (
     LED_INVERT,
     LED_PIN,
 )
-
-
-def resetStrip(strip):
-    for i in range(strip.numPixels()):
-        strip.setPixelColor(i, Color(0, 0, 0))
-    strip.show()
+from src.strip_utils.reset_strip import reset_strip
 
 
 # Define functions which animate LEDs in various ways.
@@ -97,13 +92,13 @@ def strob(strip, color=Color(255, 255, 255), wait_ms=50, duration_s=10):
             strip.setPixelColor(led, color)
         strip.show()
         time.sleep(wait_ms / 1000.0)
-        resetStrip(strip)
+        reset_strip(strip)
         time.sleep(wait_ms / 1000.0)
         for led in range(78, 115, 2):
             strip.setPixelColor(led, color)
         strip.show()
         time.sleep(wait_ms / 1000.0)
-        resetStrip(strip)
+        reset_strip(strip)
         time.sleep(wait_ms / 1000.0)
         current_time_s += 4 * wait_ms / 1000.0
 
@@ -142,4 +137,4 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         if args.clear:
-            colorWipe(strip, Color(0, 0, 0), 10)
+            reset_strip(strip)
