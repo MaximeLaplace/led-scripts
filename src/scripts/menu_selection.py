@@ -35,6 +35,11 @@ def menu() -> tuple[Callable[..., None], list[str]]:
 
     mode = modes[user_inputs["script"]]
 
+    if mode.__doc__ is not None:
+        print()
+        print(mode.__doc__)
+        print()
+
     questions_mode = create_inquirers(mode)
 
     user_inputs = inquirer.prompt(questions_mode)
