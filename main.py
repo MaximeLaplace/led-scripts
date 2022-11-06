@@ -11,8 +11,8 @@ from config import (
     LED_INVERT,
     LED_PIN,
 )
+from src.modes.utils.reset_strip import reset_strip
 from src.scripts.menu_selection import menu
-from src.strip_utils.reset_strip import reset_strip
 
 if __name__ == "__main__":
     # Process arguments

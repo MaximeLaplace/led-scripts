@@ -1,7 +1,7 @@
 import time
 
 from rpi_ws281x import Color
-from src.strip_utils.reset_strip import reset_strip
+from src.modes.utils.reset_strip import reset_strip
 
 from .utils.init_time import init_time
 

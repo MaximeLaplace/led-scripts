@@ -12,7 +12,7 @@ from config import (
     LED_INVERT,
     LED_PIN,
 )
-from src.strip_utils.reset_strip import reset_strip
+from src.modes.utils.reset_strip import reset_strip
 
 
 # Define functions which animate LEDs in various ways.
