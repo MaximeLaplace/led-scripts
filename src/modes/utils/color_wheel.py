@@ -1,4 +1,4 @@
-from rpi_ws281x import Color
+# from rpi_ws281x import Color
 
 
 def color_wheel(pos):
@@ -67,8 +67,23 @@ def create_rainbow_array(strip):
     strip_length = strip.numPixels()
     for i in range(strip_length):
         color = int_tuple(
-            invert_green_blue(hsl_to_rgb(*hsl_rainbow(0, strip_length, i)))
+            multiply_tuple_by(0.5)(
+                invert_green_blue(hsl_to_rgb(*hsl_rainbow(0, strip_length, i)))
+            )
         )
         rainbow_array.append(Color(*color))
 
     return rainbow_array
+
+
+class Strip:
+    def numPixels(self):
+        return 149
+
+
+# strip = Strip()
+
+# a = create_rainbow_array(strip)
+
+# for i in a:
+#     print(i)
