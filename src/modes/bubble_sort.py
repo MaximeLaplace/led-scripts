@@ -13,4 +13,4 @@ def bubble_sort(strip, wait_ms: int = 100, infinite: bool = False):
         strip.show()
         first = rainbow_array.pop(0)
         rainbow_array.append(first)
-        time.sleep(20 / 1000)
+        time.sleep(wait_ms / 1000)
