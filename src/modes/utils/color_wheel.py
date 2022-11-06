@@ -49,11 +49,18 @@ def invert_green_blue(t: tuple[int, int, int]):
     return r, b, g
 
 
+def int_tuple(t: tuple[int, int, int]):
+    a, b, c = t
+    return int(a), int(b), int(c)
+
+
 def create_rainbow_array(strip):
     rainbow_array = []
     strip_length = strip.numPixels()
     for i in range(strip_length):
-        color = invert_green_blue(hsl_to_rgb(*hsl_rainbow(0, strip_length, i)))
+        color = int_tuple(
+            invert_green_blue(hsl_to_rgb(*hsl_rainbow(0, strip_length, i)))
+        )
         rainbow_array.append(Color(*color))
 
     return rainbow_array
