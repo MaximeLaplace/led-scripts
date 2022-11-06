@@ -8,19 +8,36 @@ def _strobo_controller(strip, color=Color(255, 255, 255), wait_ms=50, duration_s
     """stroboscope lights"""
     current_time_s = 0
     while current_time_s <= duration_s:
+
         for led in range(13, 50, 2):
             strip.setPixelColor(led, color)
         strip.show()
         time.sleep(wait_ms / 1000.0)
         reset_strip(strip)
         time.sleep(wait_ms / 1000.0)
+
         for led in range(78, 115, 2):
             strip.setPixelColor(led, color)
         strip.show()
         time.sleep(wait_ms / 1000.0)
         reset_strip(strip)
         time.sleep(wait_ms / 1000.0)
-        current_time_s += 4 * wait_ms / 1000.0
+
+        for led in range(14, 50, 2):
+            strip.setPixelColor(led, color)
+        strip.show()
+        time.sleep(wait_ms / 1000.0)
+        reset_strip(strip)
+        time.sleep(wait_ms / 1000.0)
+
+        for led in range(79, 115, 2):
+            strip.setPixelColor(led, color)
+        strip.show()
+        time.sleep(wait_ms / 1000.0)
+        reset_strip(strip)
+        time.sleep(wait_ms / 1000.0)
+
+        current_time_s += 8 * wait_ms / 1000.0
 
 
 def strobo(
