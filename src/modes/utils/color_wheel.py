@@ -69,7 +69,7 @@ def create_rainbow_array(strip):
     strip_length = strip.numPixels()
     for i in range(strip_length):
         color = int_tuple(
-            multiply_tuple_by(0.5)(
+            multiply_tuple_by(0.75)(
                 invert_green_blue(hsl_to_rgb(*hsl_rainbow(0, strip_length, i)))
             )
         )
