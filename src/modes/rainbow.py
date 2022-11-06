@@ -13,4 +13,10 @@ def _rainbow_controller(strip, wait_ms=20, iterations=1):
 
 
 def rainbow(strip, wait_ms: int = 20, iterations: int = 1):
+    """Allume la bande de LED avec un arc-en-ciel statique
+
+    Args:
+        wait_ms (int): Aucune idée de ce que ça fait
+        iterations (int): Pareil
+    """
     _rainbow_controller(strip, wait_ms=wait_ms, iterations=iterations)

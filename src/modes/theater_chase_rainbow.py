@@ -16,4 +16,9 @@ def _theater_chase_rainbow_controller(strip, wait_ms=50):
 
 
 def theater_chase_rainbow(strip, wait_ms: int = 50):
+    """Des petites lights qui tournent en étant en arc-en-ciel
+
+    Args:
+        wait_ms (int): Le temps d'attente entre chaque step en ms (petit = rapide)
+    """
     _theater_chase_rainbow_controller(strip, wait_ms=wait_ms)

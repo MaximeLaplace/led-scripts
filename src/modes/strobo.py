@@ -29,4 +29,11 @@ def strobo(
     wait_ms: int = 50,
     duration_s: int = 10,
 ) -> None:
+    """Crée un strobo
+
+    Args:
+        color (tuple[int, int, int]): La couleur du strobo
+        wait_ms (int): Le temps d'attente entre chaque flash en millisecondes
+        duration_s (int): Combien de temps au total en secondes
+    """
     _strobo_controller(strip, Color(*color), wait_ms=wait_ms, duration_s=duration_s)
