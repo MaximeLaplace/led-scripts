@@ -22,6 +22,8 @@ def hsl_rainbow(start: int, end: int, position: int):
 
 
 def hsl_to_rgb(h, s, l):
+    if h == 360:
+        h = 0
     c = s * (1 - abs(2 * l - 1))
     x = c * (1 - abs((h / 60) % 2 - 1))
     m = l - c / 2
@@ -74,16 +76,3 @@ def create_rainbow_array(strip):
         rainbow_array.append(Color(*color))
 
     return rainbow_array
-
-
-class Strip:
-    def numPixels(self):
-        return 149
-
-
-# strip = Strip()
-
-# a = create_rainbow_array(strip)
-
-# for i in a:
-#     print(i)
