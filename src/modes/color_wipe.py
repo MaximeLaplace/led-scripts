@@ -2,7 +2,7 @@ import time
 
 from rpi_ws281x import Color
 
-from utils.init_time import init_time
+from .utils.init_time import init_time
 
 
 def _color_wipe_controller(
