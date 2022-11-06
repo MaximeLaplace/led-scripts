@@ -12,7 +12,9 @@ def _bogo_controller(strip, wait_ms: int, duration_s: int, chance_of_light: int)
 
     for _ in range(iterations):
         random.shuffle(rainbow_array)
-        address_led_with_array(strip, rainbow_array, chance_of_light=chance_of_light)
+        address_led_with_array(
+            strip, rainbow_array, chance_of_light=chance_of_light / 100
+        )
         strip.show()
         time.sleep(wait_ms / 1000)
 
