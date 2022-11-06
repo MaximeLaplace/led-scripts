@@ -1,4 +1,4 @@
-# from rpi_ws281x import Color
+from rpi_ws281x import Color
 
 
 def color_wheel(pos):
