@@ -36,9 +36,11 @@ if __name__ == "__main__":
     strip.begin()
 
     try:
-        while True:
-            mode(strip, *args)
+        mode(strip, *args)
 
     except KeyboardInterrupt:
         if script_args.clear:
             reset_strip(strip)
+
+    if script_args.clear:
+        reset_strip(strip)
