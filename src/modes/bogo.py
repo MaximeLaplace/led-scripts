@@ -11,7 +11,8 @@ def _bogo_controller(strip, wait_ms: int, duration_s: int):
     iterations = int(duration_s * 1000 / wait_ms)
 
     for _ in range(iterations):
-        address_array(strip, random.shuffle(rainbow_array))
+        random.shuffle(rainbow_array)
+        address_array(strip, rainbow_array)
         strip.show()
         time.sleep(wait_ms / 1000)
 
