@@ -13,6 +13,6 @@ def init_time(time_delta: int):
     start_time = datetime.now().timestamp()
 
     def time_left():
-        return time_delta * 1000 - (datetime.now() - start_time)
+        return time_delta * 1000 - (datetime.now().timestamp() - start_time)
 
     return time_left
