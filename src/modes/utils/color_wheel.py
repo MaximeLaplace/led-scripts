@@ -27,7 +27,7 @@ def create_rainbow_array(strip):
     def blue(x):
         return int(max(255 - 255 / m13 * abs(x - m23), 0))
 
-    return [(Color(*red(x)), Color(*green(x)), Color(*blue(x))) for x in range(length)]
+    return [Color(red(x), green(x), blue(x)) for x in range(length)]
 
 
 def hsl_rainbow(start: int, end: int, position: int):
