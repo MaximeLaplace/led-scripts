@@ -13,6 +13,23 @@ def color_wheel(pos):
         return Color(0, pos * 3, 255 - pos * 3)
 
 
+def create_rainbow_array(strip):
+    length = strip.numPixels()
+    m13 = length / 3
+    m23 = 2 * length / 3
+
+    def red(x):
+        return int(max(255 - 255 / m13 * abs(x - m13), 0))
+
+    def green(x):
+        return int(max(255 * (abs(x - length / 2) / m13 - 0.5), 0))
+
+    def blue(x):
+        return int(max(255 - 255 / m13 * abs(x - m23), 0))
+
+    return [(Color(*red(x)), Color(*green(x)), Color(*blue(x))) for x in range(length)]
+
+
 def hsl_rainbow(start: int, end: int, position: int):
     min_hue = 360
     max_hue = 0
@@ -62,17 +79,3 @@ def multiply_tuple_by(factor: int):
         return a * factor, b * factor, c * factor
 
     return inner
-
-
-def create_rainbow_array(strip):
-    rainbow_array = []
-    strip_length = strip.numPixels()
-    for i in range(strip_length):
-        color = int_tuple(
-            multiply_tuple_by(1)(
-                invert_green_blue(hsl_to_rgb(*hsl_rainbow(0, strip_length, i)))
-            )
-        )
-        rainbow_array.append(Color(*color))
-
-    return rainbow_array
