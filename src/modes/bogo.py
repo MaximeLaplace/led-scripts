@@ -26,7 +26,7 @@ def _bogo_controller(
 def bogo(
     strip,
     wait_ms: int = 100,
-    chance_of_light: float = 1.0,
+    chance_of_light: float = 0.5,
     durations_s: int = 10,
     infinite: bool = False,
 ):
