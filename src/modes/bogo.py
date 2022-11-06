@@ -8,7 +8,7 @@ from .utils.color_wheel import create_rainbow_array
 def _bogo_controller(strip, wait_ms: int, duration_s: int):
 
     rainbow_array = create_rainbow_array(strip)
-    iterations = duration_s * 1000 / wait_ms
+    iterations = int(duration_s * 1000 / wait_ms)
 
     for _ in range(iterations):
         address_array(strip, random.shuffle(rainbow_array))
