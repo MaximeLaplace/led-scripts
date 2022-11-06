@@ -9,6 +9,7 @@ INT_REGEX_BIT = "\d+"
 
 NOT_EMPTY_INT_REGEX = re.compile("^\d+$")
 NOT_EMPTY_STR_REGEX = re.compile("^.+$")
+NOT_EMPTY_FLOAT_REGEX = re.compile("^((\.|\,)?\d+)|(\d+(\.|\,)?\d*)$")
 
 INQUIRERS = {
     str: lambda name: inquirer.Text(
@@ -20,6 +21,11 @@ INQUIRERS = {
         name,
         message=f"Specify {name} (int)",
         validate=lambda _, x: NOT_EMPTY_INT_REGEX.match(x),
+    ),
+    float: lambda name: inquirer.Text(
+        name,
+        message=f"Specify {name} (float)",
+        validate=lambda _, x: NOT_EMPTY_FLOAT_REGEX.match(x),
     ),
     bool: lambda name: inquirer.Confirm(name, message=f"{name} ?"),
     tuple(): lambda name, tuple_types: inquirer.Text(

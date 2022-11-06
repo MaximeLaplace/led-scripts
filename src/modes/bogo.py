@@ -5,21 +5,19 @@ from .utils.address_led_with_array import address_led_with_array
 from .utils.color_wheel import create_rainbow_array
 
 
-def _bogo_controller(strip, wait_ms: int, duration_s: int, chance_of_light: int):
+def _bogo_controller(strip, wait_ms: int, duration_s: int, chance_of_light: float):
 
     rainbow_array = create_rainbow_array(strip)
     iterations = int(duration_s * 1000 / wait_ms)
 
     for _ in range(iterations):
         random.shuffle(rainbow_array)
-        address_led_with_array(
-            strip, rainbow_array, chance_of_light=chance_of_light / 100
-        )
+        address_led_with_array(strip, rainbow_array, chance_of_light=chance_of_light)
         strip.show()
         time.sleep(wait_ms / 1000)
 
 
-def bogo(strip, wait_ms: int = 50, durations_s: int = 10, chance_of_light: int = 1):
+def bogo(strip, wait_ms: int = 50, durations_s: int = 10, chance_of_light: float = 1.0):
     """crée un arc-en-ciel et le mélange en bogo sort
 
     Args:

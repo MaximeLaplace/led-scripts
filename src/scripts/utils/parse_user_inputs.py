@@ -15,6 +15,8 @@ def parse_user_inputs(
     ):
         if param_type == int:
             parsed_inputs[param_name] = int(user_input)
+        elif param_type == float:
+            parsed_inputs[param_name] = float(user_input)
         elif param_type() == tuple():
             tuple_types = get_tuple_types(param_type)
             parsed_inputs[param_name] = tuple(
