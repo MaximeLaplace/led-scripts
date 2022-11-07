@@ -12,6 +12,7 @@ from config import (
     LED_PIN,
 )
 from src.modes.utils.reset_strip import reset_strip
+from src.scripts.create_strip import create_strip
 from src.scripts.menu_selection import menu
 
 if __name__ == "__main__":
@@ -22,18 +23,9 @@ if __name__ == "__main__":
     )
     script_args = parser.parse_args()
 
-    mode, args = menu()
+    strip = create_strip()
 
-    strip = PixelStrip(
-        LED_COUNT,
-        LED_PIN,
-        LED_FREQ_HZ,
-        LED_DMA,
-        LED_INVERT,
-        LED_BRIGHTNESS,
-        LED_CHANNEL,
-    )
-    strip.begin()
+    mode, args = menu()
 
     try:
         mode(strip, *args)
