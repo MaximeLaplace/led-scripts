@@ -35,14 +35,16 @@ class PixelStripWithSegments(PixelStrip):
         super().__init__(*args, *kwargs)
         self._bp = [0, 13, 50, 72, 75, 78, 115, 136, 149]
 
-        self.segment_0 = PixelSegment(super(), self._bp[0], self._bp[1])
-        self.segment_1 = PixelSegment(super(), self._bp[1], self._bp[2])
-        self.segment_2 = PixelSegment(super(), self._bp[2], self._bp[3])
-        self.segment_3 = PixelSegment(super(), self._bp[3], self._bp[4])
-        self.segment_4 = PixelSegment(super(), self._bp[4], self._bp[5])
-        self.segment_5 = PixelSegment(super(), self._bp[5], self._bp[6])
-        self.segment_6 = PixelSegment(super(), self._bp[6], self._bp[7])
-        self.segment_7 = PixelSegment(super(), self._bp[7], self._bp[8])
+        self.segments = [
+            PixelSegment(super(), self._bp[0], self._bp[1]),
+            PixelSegment(super(), self._bp[1], self._bp[2]),
+            PixelSegment(super(), self._bp[2], self._bp[3]),
+            PixelSegment(super(), self._bp[3], self._bp[4]),
+            PixelSegment(super(), self._bp[4], self._bp[5]),
+            PixelSegment(super(), self._bp[5], self._bp[6]),
+            PixelSegment(super(), self._bp[6], self._bp[7]),
+            PixelSegment(super(), self._bp[7], self._bp[8]),
+        ]
 
     def get_segment_from_index(self, index: int):
         segment_index = -1
@@ -59,7 +61,7 @@ class PixelStripSelected(PixelStripWithSegments):
     def numPixels(self):
         return sum(
             [
-                getattr(self, f"segment_{segment_number}").numPixels()
+                self.segments[segment_number].numPixels()
                 for segment_number in self._segments
             ]
         )
@@ -69,7 +71,7 @@ class PixelStripSelected(PixelStripWithSegments):
         number_of_led = 0
         while index >= number_of_led:
             segment_number += 1
-            number_of_led += getattr(self, f"segment_{segment_number}").numPixels()
+            number_of_led += self.segments[segment_number].numPixels()
 
         return self._segments[segment_number]
 
@@ -78,7 +80,7 @@ class PixelStripSelected(PixelStripWithSegments):
         segment_number = self._get_real_segment_from_index(index)
         for i in range(segment_number):
             if i not in self._segments:
-                transformed_index += getattr(self, f"segment_{i}").numPixels()
+                transformed_index += self.segments[i].numPixels()
 
     def setPixelColor(self, index: int):
         super().setPixelColor(self._transform_index(index))

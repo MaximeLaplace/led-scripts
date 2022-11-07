@@ -14,8 +14,8 @@ def bubble_sort(strip, wait_ms: int = 100, infinite: bool = False):
 
     while True:
         for i in range(8):
-            getattr(strip, f"segment_{i}").setColor(Color(0, 0, 0))
-        getattr(strip, f"segment_{index % 8}").setColor(Color(125, 125, 125))
+            strip.segments[i].setColor(Color(0, 0, 0))
+        strip.segments[index % 8].setColor(Color(125, 125, 125))
         strip.show()
         index += 1
         time.sleep(wait_ms / 1000)
