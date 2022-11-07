@@ -85,9 +85,10 @@ class PixelStripSelected(PixelStripWithSegments):
         for i in range(segment_number):
             if i not in self._segments:
                 transformed_index += self.segments[i].numPixels()
+        return transformed_index
 
-    def setPixelColor(self, index: int):
-        super().setPixelColor(self._transform_index(index))
+    def setPixelColor(self, index: int, color):
+        super().setPixelColor(self._transform_index(index), color)
 
 
 def _generate_strip(segments: Optional[tuple[int]] = None):
