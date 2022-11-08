@@ -71,15 +71,17 @@ class PixelStripSelected(PixelStripWithSegments):
         )
 
     def _get_real_segment_from_index(self, index):
+        # print(f"get_real_segment_from_index called with : {index}")
         segment_number = -1
         number_of_led = 0
         while index >= number_of_led:
             segment_number += 1
             number_of_led += self.segments[segment_number].numPixels()
-
-        return self._segments[segment_number]
+        # print(f"segment number : {segment_number}")
+        return segment_number
 
     def _transform_index(self, index):
+        # print(f"transform_index called with {index}")
         transformed_index = index
         segment_number = self._get_real_segment_from_index(index)
         for i in range(segment_number):
@@ -88,7 +90,10 @@ class PixelStripSelected(PixelStripWithSegments):
         return transformed_index
 
     def setPixelColor(self, index: int, color):
+        # print()
+        # print(f"setPixelColor called with {index},{color}")
         super().setPixelColor(self._transform_index(index), color)
+        # print()
 
 
 def _generate_strip(segments: Optional[tuple[int]] = None):

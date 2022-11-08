@@ -4,6 +4,7 @@ from .utils.reset_strip import reset_strip
 
 
 def debug(strip):
+    print(strip.numPixels())
     while True:
         index = 0
         try:
