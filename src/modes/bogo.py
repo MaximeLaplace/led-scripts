@@ -2,7 +2,7 @@ import random
 import time
 
 from .utils.address_led_with_array import address_led_with_array
-from .utils.color_wheel import create_color_rainbow_array
+from .utils.color_wheel import create_rainbow_array
 from .utils.init_time import init_time
 
 
@@ -14,7 +14,7 @@ def _bogo_controller(
     infinite: bool = False,
 ):
     time_left = init_time(duration_s)
-    rainbow_array = create_color_rainbow_array(strip)
+    rainbow_array = create_rainbow_array(strip)
 
     while time_left() > 0 or infinite:
         random.shuffle(rainbow_array)

@@ -13,7 +13,7 @@ def color_wheel(pos):
         return Color(0, pos * 3, 255 - pos * 3)
 
 
-def create_RGB_rainbow_array(strip):
+def create_rainbow_array(strip):
     length = strip.numPixels()
     m13 = length / 3
     m23 = 2 * length / 3
@@ -28,7 +28,3 @@ def create_RGB_rainbow_array(strip):
         return int(max(255 - 255 / m13 * abs(x - m23), 0))
 
     return [(red(x), green(x), blue(x)) for x in range(length)]
-
-
-def create_color_rainbow_array(strip):
-    return [Color(*color) for color in create_RGB_rainbow_array(strip)]

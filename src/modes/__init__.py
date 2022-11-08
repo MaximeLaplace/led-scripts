@@ -1,4 +1,5 @@
 from .bogo import bogo
+from .bubble_sort import bubble_sort
 from .color_wipe import color_wipe
 from .lamp import lamp
 from .rainbow import rainbow
