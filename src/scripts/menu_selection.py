@@ -6,6 +6,8 @@ import pyfiglet
 from src.scripts.utils.create_inquirers import create_inquirers, get_function_parameters
 from src.scripts.utils.parse_user_inputs import parse_user_inputs
 
+from .utils.new_terminal_section import new_terminal_section
+
 before = globals().copy()
 from src.modes import *
 
@@ -22,9 +24,7 @@ for key, value in after.items():
 
 
 def menu() -> tuple[Callable[..., None], list[str]]:
-    os.system("cls" if os.name == "nt" else "clear")
-    print(pyfiglet.figlet_format("Appli    LED"))
-    print()
+    new_terminal_section("Appli   LED")
 
     question_mode = [
         inquirer.List(
@@ -38,9 +38,7 @@ def menu() -> tuple[Callable[..., None], list[str]]:
 
     mode = modes[user_inputs["mode"]]
 
-    os.system("cls" if os.name == "nt" else "clear")
-    print(pyfiglet.figlet_format(user_inputs["mode"].replace("_", "  ")))
-    print()
+    new_terminal_section(user_inputs["mode"].replace("_", "  "))
 
     if mode.__doc__ is not None:
         print(mode.__doc__)

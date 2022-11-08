@@ -1,7 +1,5 @@
 import argparse
 
-from rpi_ws281x import PixelStrip
-
 from config import (
     LED_BRIGHTNESS,
     LED_CHANNEL,
@@ -14,6 +12,7 @@ from config import (
 from src.modes.utils.reset_strip import reset_strip
 from src.scripts.create_strip import create_strip
 from src.scripts.menu_selection import menu
+from src.scripts.utils.new_terminal_section import new_terminal_section
 
 if __name__ == "__main__":
     # Process arguments
@@ -22,6 +21,8 @@ if __name__ == "__main__":
         "-c", "--clear", action="store_true", help="clear the display on exit"
     )
     script_args = parser.parse_args()
+
+    new_terminal_section("Appli   LED")
 
     strip = create_strip()
 
