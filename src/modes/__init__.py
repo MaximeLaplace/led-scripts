@@ -1,6 +1,7 @@
 from .bogo import bogo
 from .bubble_sort import bubble_sort
 from .color_wipe import color_wipe
+from .debug import debug
 from .lamp import lamp
 from .rainbow import rainbow
 from .rainbow_cycle import rainbow_cycle
