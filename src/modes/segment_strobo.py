@@ -19,9 +19,9 @@ def segment_strobo(
     length = len(strip.mode_segments)
 
     while time_left() > 0 or infinite:
-        for i in range(8):
-            strip.segments[i].setColor(Color(0, 0, 0))
-        strip.segments[index % 8].setColor(Color(*color))
+        for i in range(length):
+            strip.mode_segments[i].setColor(Color(0, 0, 0))
+        strip.mode_segments[index % length].setColor(Color(*color))
         strip.show()
         index += 1
         time.sleep(wait_ms / 1000)
