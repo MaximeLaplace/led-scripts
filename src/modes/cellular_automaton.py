@@ -34,7 +34,7 @@ def tertiary_decomposition(x):
             x -= pow
         else:
             decomposition.append(0)
-    return decomposition
+    return decomposition[::-1] # To have the lower power on the left
 
 
 def cellular_automaton(
@@ -66,9 +66,9 @@ def cellular_automaton(
     leds_status = CircularList([1]*strip.numPixels()) # Array de 0,1,2
     leds_status[0] = 1 # Position initiale
 
-    tertiary = tertiary_decomposition(rule)[::-1]
+    tertiary = tertiary_decomposition(rule)
 
-    while time_left() or infinite:
+    while infinite or time_left():
         for i in range(strip.numPixels()):
             s = sum(leds_status[i-1:i+2])
             strip.setPixelColor(i, number_to_color[tertiary[s]])
