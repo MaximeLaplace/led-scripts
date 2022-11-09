@@ -40,7 +40,7 @@ def tertiary_decomposition(x):
 def cellular_automaton(
     strip,
     color: tuple[int, int, int] = (127, 255, 0),
-    rule: int = 948,
+    rule: int = 912,
     wait_ms: int = 50,
     duration_s: int = 10,
     infinite: bool = True,
@@ -62,8 +62,6 @@ def cellular_automaton(
 
     leds_status = CircularList([1]*strip.numPixels()) # Array de 0,1,2
     leds_status[0] = 1 # Position initiale
-    leds_status[4] = 2
-    leds_status[6] = 1
 
     tertiary = tertiary_decomposition(rule)[::-1]
 
