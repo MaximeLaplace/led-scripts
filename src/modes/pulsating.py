@@ -8,7 +8,7 @@ from .utils.init_time import init_time
 def pulsating(
     strip,
     main_color: tuple[int, int, int] = (255, 0, 0),
-    wait_ms: int = 50,
+    wait_ms: int = 500,
     iterations: int = 1000,
     infinite: bool = True,
 ):
