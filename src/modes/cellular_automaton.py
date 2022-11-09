@@ -39,7 +39,7 @@ def tertiary_decomposition(x):
 
 def cellular_automaton(
     strip,
-    color: tuple[int, int, int] = (127, 255, 0),
+    color: tuple[int, int, int] = (255, 255, 0),
     rule: int = 912,
     wait_ms: int = 50,
     duration_s: int = 10,
