@@ -61,6 +61,7 @@ class PixelStripSelected(PixelStripWithSegments):
     def __init__(self, segments: tuple[int], *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._segments = sorted(list(set(segments)))
+        self.mode_segments = [self.segments[index] for index in self._segments]
 
     def numPixels(self):
         return sum(
@@ -75,7 +76,7 @@ class PixelStripSelected(PixelStripWithSegments):
         number_of_led = 0
         while index >= number_of_led:
             segment_number += 1
-            number_of_led += self.segments[self._segments[segment_number]].numPixels()
+            number_of_led += self.mode_segments[segment_number].numPixels()
         return self._segments[segment_number]
 
     def _transform_index(self, index):
