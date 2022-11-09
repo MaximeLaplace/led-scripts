@@ -27,6 +27,8 @@ def pulsating(
 
     while iterations > 0 or infinite:
         for i in range(strip.numPixels()):
+            # reset the previous led
+            strip.setPixelColor((i-1)%strip.numPixels(), Color(0,0,0))
             for q in range(10): # Length of the band
                 r,g,b = color_gradient[q]
                 strip.setPixelColor((i+q)%strip.numPixels(), Color(r,g,b))
