@@ -67,6 +67,7 @@ def cellular_automaton(
     time.sleep(wait_ms / 1000.0)
 
     tertiary = tertiary_decomposition(rule)[::-1]
+    print(tertiary)
 
     while time_left() or infinite:
         for i in range(strip.numPixels()):
