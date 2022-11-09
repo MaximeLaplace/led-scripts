@@ -1,5 +1,7 @@
 import time
 
+from rpi_ws281x import Color
+
 from .utils.init_time import init_time
 
 
@@ -26,7 +28,7 @@ def pulsating(
     while infinite or iterations > 0:
         for i in range(strip.numPixels()):
             for q in range(10): # Length of the band
-                strip.setPixelColor((i+q)%strip.numPixels(), color_gradient(q))
+                strip.setPixelColor((i+q)%strip.numPixels(), Color(color_gradient[q]))
         strip.show()
         time.sleep(wait_ms / 1000.0)
 
