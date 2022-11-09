@@ -1,5 +1,3 @@
-from typing import Optional
-
 import inquirer
 from config import (
     BREAKPOINTS,
@@ -12,6 +10,9 @@ from config import (
     LED_PIN,
 )
 from rpi_ws281x import PixelStrip
+
+from .utils.create_inquirers import INQUIRERS
+from .utils.parse_user_inputs import parse_input
 
 
 class PixelSegment:
@@ -91,20 +92,10 @@ class PixelStripSelected(PixelStripWithSegments):
         super().setPixelColor(self._transform_index(index), color)
 
 
-def _generate_strip(segments: Optional[tuple[int]] = None):
+def _generate_strip(segments: tuple[int] = (0, 1, 2, 3, 4, 5, 6, 7)):
     if segments is not None:
         strip = PixelStripSelected(
             segments,
-            LED_COUNT,
-            LED_PIN,
-            LED_FREQ_HZ,
-            LED_DMA,
-            LED_INVERT,
-            LED_BRIGHTNESS,
-            LED_CHANNEL,
-        )
-    else:
-        strip = PixelStripWithSegments(
             LED_COUNT,
             LED_PIN,
             LED_FREQ_HZ,
@@ -128,10 +119,7 @@ def create_strip():
         inquirer.List(
             "strip_type",
             message="Quelles LED voulez vous utiliser ?",
-            choices=[
-                _UPPER_LED,
-                _ALL_LED,
-            ],
+            choices=[_UPPER_LED, _ALL_LED, _CUSTOM_LED],
             carousel=True,
         )
     ]
@@ -142,3 +130,17 @@ def create_strip():
 
     if led_to_address == _UPPER_LED:
         return _generate_strip((1, 2, 5, 6))
+
+    if led_to_address == _CUSTOM_LED:
+        segments = inquirer.prompt(
+            [
+                inquirer.Checkbox(
+                    "segments",
+                    message="Sélectionnez les segments désirés",
+                    choices=[0, 1, 2, 3, 4, 5, 6, 7],
+                    carousel=True,
+                )
+            ]
+        )["segments"]
+
+        return _generate_strip(tuple(segments))
