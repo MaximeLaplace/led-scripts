@@ -12,7 +12,7 @@ def debug(strip):
         except:
             break
 
-        reset_strip(strip)
+        # reset_strip(strip)
         try:
             strip.setPixelColor(index, Color(255, 255, 255))
             strip.show()

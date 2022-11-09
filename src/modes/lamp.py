@@ -7,7 +7,7 @@ from .utils.init_time import init_time
 
 def lamp(
     strip,
-    color: tuple[int, int, int] = (60, 40, 60),
+    color: tuple[int, int, int] = (50, 10, 50),
     duration_s: int = 10,
     infinite: bool = True,
 ):

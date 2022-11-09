@@ -2,6 +2,7 @@ from typing import Optional
 
 import inquirer
 from config import (
+    BREAKPOINTS,
     LED_BRIGHTNESS,
     LED_CHANNEL,
     LED_COUNT,
@@ -33,22 +34,21 @@ class PixelSegment:
 class PixelStripWithSegments(PixelStrip):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, *kwargs)
-        self._bp = [0, 13, 50, 72, 75, 78, 115, 136, 149]
 
         self.segments = [
-            PixelSegment(super(), self._bp[0], self._bp[1]),
-            PixelSegment(super(), self._bp[1], self._bp[2]),
-            PixelSegment(super(), self._bp[2], self._bp[3]),
-            PixelSegment(super(), self._bp[3], self._bp[4]),
-            PixelSegment(super(), self._bp[4], self._bp[5]),
-            PixelSegment(super(), self._bp[5], self._bp[6]),
-            PixelSegment(super(), self._bp[6], self._bp[7]),
-            PixelSegment(super(), self._bp[7], self._bp[8]),
+            PixelSegment(super(), BREAKPOINTS[0], BREAKPOINTS[1]),
+            PixelSegment(super(), BREAKPOINTS[1], BREAKPOINTS[2]),
+            PixelSegment(super(), BREAKPOINTS[2], BREAKPOINTS[3]),
+            PixelSegment(super(), BREAKPOINTS[3], BREAKPOINTS[4]),
+            PixelSegment(super(), BREAKPOINTS[4], BREAKPOINTS[5]),
+            PixelSegment(super(), BREAKPOINTS[5], BREAKPOINTS[6]),
+            PixelSegment(super(), BREAKPOINTS[6], BREAKPOINTS[7]),
+            PixelSegment(super(), BREAKPOINTS[7], BREAKPOINTS[8]),
         ]
 
     def get_segment_from_index(self, index: int):
         segment_index = -1
-        while index >= self._bp[segment_index + 1]:
+        while index >= BREAKPOINTS[segment_index + 1]:
             segment_index += 1
         return segment_index
 
@@ -70,30 +70,24 @@ class PixelStripSelected(PixelStripWithSegments):
             ]
         )
 
-    def _get_real_segment_from_index(self, index):
-        # print(f"get_real_segment_from_index called with : {index}")
+    def _get_real_segment_number_from_index(self, index):
         segment_number = -1
         number_of_led = 0
         while index >= number_of_led:
             segment_number += 1
-            number_of_led += self.segments[segment_number].numPixels()
-        # print(f"segment number : {segment_number}")
-        return segment_number
+            number_of_led += self.segments[self._segments[segment_number]].numPixels()
+        return self._segments[segment_number]
 
     def _transform_index(self, index):
-        # print(f"transform_index called with {index}")
         transformed_index = index
-        segment_number = self._get_real_segment_from_index(index)
+        segment_number = self._get_real_segment_number_from_index(index)
         for i in range(segment_number):
             if i not in self._segments:
                 transformed_index += self.segments[i].numPixels()
         return transformed_index
 
     def setPixelColor(self, index: int, color):
-        # print()
-        # print(f"setPixelColor called with {index},{color}")
         super().setPixelColor(self._transform_index(index), color)
-        # print()
 
 
 def _generate_strip(segments: Optional[tuple[int]] = None):
