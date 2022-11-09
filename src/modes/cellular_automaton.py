@@ -58,9 +58,9 @@ def cellular_automaton(
 
     r,b,g = color
     number_to_color = {
-        0:Color(0,0,0),
-        1:Color(r//2,b//2,g//2),
-        2:Color(r,b,g),
+        0: Color(0,0,0),
+        1: Color(r//2,b//2,g//2),
+        2: Color(r,b,g),
     }
 
     leds_status = CircularList([1]*strip.numPixels()) # Array de 0,1,2
@@ -71,7 +71,7 @@ def cellular_automaton(
     while time_left() or infinite:
         for i in range(strip.numPixels()):
             s = sum(leds_status[i-1:i+2])
-            strip.setPixelColor(i, number_to_color(tertiary[s]))
+            strip.setPixelColor(i, number_to_color[tertiary[s]])
             leds_status[i] = tertiary[s]
         strip.show()
         time.sleep(wait_ms / 1000.0)
