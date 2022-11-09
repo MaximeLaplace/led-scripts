@@ -31,8 +31,7 @@ def pulsating(
             strip.setPixelColor((i-1)%strip.numPixels(), Color(0,0,0))
             for q in range(10): # Length of the band
                 r,g,b = color_gradient[q]
-                print("led nb: ",(i+q)%strip.numPixels())
-                strip.setPixelColor((i+q)%strip.numPixels(), Color(r,g,b))
+                strip.setPixelColor((i+q)%strip.numPixels(), Color(255,0,0))
         strip.show()
         time.sleep(wait_ms / 1000.0)
 
