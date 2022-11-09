@@ -8,7 +8,7 @@ from .utils.init_time import init_time
 def pulsating(
     strip,
     main_color: tuple[int, int, int] = (255, 0, 0),
-    wait_ms: int = 500,
+    wait_ms: int = 50,
     iterations: int = 1000,
     infinite: bool = True,
 ):
@@ -33,6 +33,6 @@ def pulsating(
                 r,g,b = color_gradient[q]
                 strip.setPixelColor((i+q)%strip.numPixels(), Color(r,g,b))
             strip.show()
-        time.sleep(wait_ms / 1000.0)
+            time.sleep(wait_ms / 1000.0)
 
         iterations -= 1
