@@ -1,6 +1,5 @@
 import time
 
-from .utils.address_led_with_array import address_led_with_array
 from .utils.init_time import init_time
 from .utils.rainbow import create_rainbow_array, shift
 
@@ -23,6 +22,7 @@ def rainbow(
     time_left = init_time(duration_s)
 
     while time_left() > 0 or infinite:
-        address_led_with_array(strip, rainbow_array)
+        strip.setArrayColor(rainbow_array)
+        strip.show()
         shift(rainbow_array)
         time.sleep(wait_ms / 1000.0)

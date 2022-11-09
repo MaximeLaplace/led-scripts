@@ -91,6 +91,16 @@ class PixelStripSelected(PixelStripWithSegments):
     def setPixelColor(self, index: int, color):
         super().setPixelColor(self._transform_index(index), color)
 
+    def setArrayColor(self, color_array):
+        if self.numPixels() != len(color_array):
+            raise (
+                ValueError(
+                    f"L'array de couleur n'a pas autant de couleurs ({len(color_array)} couleurs) qu'il y a de LED sur la bande ({self.numPixels()} LEDs) !"
+                )
+            )
+        for i in range(self.numPixels()):
+            self.setPixelColor(i, color_array[i])
+
 
 def _generate_strip(segments: tuple[int] = (0, 1, 2, 3, 4, 5, 6, 7)):
     if segments is not None:

@@ -1,7 +1,6 @@
 import random
 import time
 
-from .utils.address_led_with_array import address_led_with_array
 from .utils.rainbow import create_rainbow_array
 
 
@@ -36,7 +35,8 @@ def bubble_sort(strip, wait_ms: int = 2, rounds: int = 1, infinite: bool = False
 
     while rounds_left > 0 or infinite:
         for array_state in bubble_sort_array(rainbow_array):
-            address_led_with_array(strip, array_state)
+            strip.setArrayColor(array_state)
+            strip.show()
             time.sleep(wait_ms / 1000)
 
         rounds_left -= 1
