@@ -10,7 +10,7 @@ def pulsating(
     main_color: tuple[int, int, int] = (255, 0, 0),
     wait_ms: int = 50,
     iterations: int = 10,
-    infinite: bool = False,
+    infinite: bool = True,
 ):
     """Bande dont l'intensité est plus forte au milieu qui tourne
 
@@ -18,14 +18,14 @@ def pulsating(
         main_color (tuple[int, int, int]) : couleur principale apparaissant (il n'y aura que des variations d'intensité)
         wait_ms (int): le temps d'attente entre chaque rotation
         iterations (int): Le nombre de tours effectués
-        inifinite (bool): run le script à l'infini
+        infinite (bool): run le script à l'infini
     """
     r,g,b = main_color
     color_gradient = [ (k*r//10, k*g//10, k*b//10)
         for k in list(range(1,10,2)) + list(range(1,10,2))[::-1]
     ]
 
-    while infinite or iterations > 0:
+    while iterations > 0 or infinite:
         for i in range(strip.numPixels()):
             for q in range(10): # Length of the band
                 r,g,b = color_gradient[q]
