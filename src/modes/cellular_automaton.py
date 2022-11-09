@@ -62,6 +62,7 @@ def cellular_automaton(
 
     leds_status = CircularList([0]*strip.numPixels()) # Array de 0,1,2
     leds_status[0] = 2 # Position initiale
+    strip.setPixelColor(0, main_color)
     print("position initiale : ", leds_status)
 
     tertiary = tertiary_decomposition(rule)[::-1]
