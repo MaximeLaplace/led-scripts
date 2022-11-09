@@ -1,7 +1,5 @@
 from rpi_ws281x import Color
 
-from .utils.reset_strip import reset_strip
-
 
 def debug(strip):
     print(strip.numPixels())
@@ -12,7 +10,6 @@ def debug(strip):
         except:
             break
 
-        # reset_strip(strip)
         try:
             strip.setPixelColor(index, Color(255, 255, 255))
             strip.show()

@@ -3,7 +3,6 @@ import time
 from rpi_ws281x import Color
 
 from .utils.init_time import init_time
-from .utils.reset_strip import reset_strip
 
 
 def segment_strobo(
@@ -26,5 +25,5 @@ def segment_strobo(
         index += 1
         time.sleep(wait_ms / 1000)
 
-        reset_strip(strip)
+        strip.reset()
         time.sleep(wait_ms / 1000)

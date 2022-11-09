@@ -2,7 +2,6 @@ import time
 
 from .utils.init_time import init_time
 from .utils.rainbow import create_rainbow_array, shift
-from .utils.reset_strip import reset_strip
 
 
 def theater_chase_rainbow(
@@ -18,7 +17,7 @@ def theater_chase_rainbow(
 
     while time_left() > 0 or infinite:
         for offset in range(3):
-            reset_strip(strip)
+            strip.reset()
             for i in range(offset, strip.numPixels(), 3):
                 strip.setPixelColor(i, rainbow_array[i])
             strip.show()

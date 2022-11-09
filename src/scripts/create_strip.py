@@ -57,6 +57,10 @@ class PixelStripWithSegments(PixelStrip):
         for i in range(self.numPixels()):
             self.setPixelColor(i, color)
 
+    def reset(self):
+        for i in range(self.numPixels()):
+            self.setPixelColor(i, 0)
+
 
 class PixelStripSelected(PixelStripWithSegments):
     def __init__(self, segments: tuple[int], *args, **kwargs):
