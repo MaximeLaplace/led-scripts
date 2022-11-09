@@ -2,8 +2,6 @@ import time
 
 from rpi_ws281x import Color
 
-from .utils.init_time import init_time
-
 
 def pulse(
     strip,
