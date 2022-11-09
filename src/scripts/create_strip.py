@@ -119,7 +119,7 @@ def create_strip():
         inquirer.List(
             "strip_type",
             message="Quelles LED voulez vous utiliser ?",
-            choices=[_UPPER_LED, _ALL_LED, _CUSTOM_LED],
+            choices=[_ALL_LED, _UPPER_LED, _CUSTOM_LED],
             carousel=True,
         )
     ]
