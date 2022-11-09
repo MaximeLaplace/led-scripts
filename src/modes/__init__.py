@@ -2,7 +2,7 @@ from .bogo import bogo
 from .bubble_sort import bubble_sort
 from .color_wipe import color_wipe
 from .lamp import lamp
-from .pulsating import pulsating
+from .pulse import pulse
 from .rainbow import rainbow
 from .segment_strobo import segment_strobo
 from .strobo import strobo
