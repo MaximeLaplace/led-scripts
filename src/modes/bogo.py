@@ -2,8 +2,8 @@ import random
 import time
 
 from .utils.address_led_with_array import address_led_with_array
-from .utils.color_wheel import create_rainbow_array
 from .utils.init_time import init_time
+from .utils.rainbow import create_rainbow_array
 
 
 def _bogo_controller(

@@ -1,8 +1,7 @@
 import time
 
-from .utils.address_led_with_array import address_led_with_array
-from .utils.color_wheel import color_wheel, create_rainbow_array
 from .utils.init_time import init_time
+from .utils.rainbow import create_rainbow_array, shift
 from .utils.reset_strip import reset_strip
 
 
@@ -23,5 +22,5 @@ def theater_chase_rainbow(
             for i in range(offset, strip.numPixels(), 3):
                 strip.setPixelColor(i, rainbow_array[i])
             strip.show()
-            rainbow_array.append(rainbow_array.pop(0))
+            shift(rainbow_array)
             time.sleep(wait_ms / 1000)
