@@ -8,17 +8,17 @@ def hue_to_rgb(hue: int): # 100% saturation and 50% lightness
     h = hue/60
     X = int(255*(1-abs(h%2-1)))
     if 0 <= h < 1:
-        return 255,0,X
+        return (255,0,X)
     if 1 <= h < 2:
-        return X,0,255
+        return (X,0,255)
     if 2 <= h < 3:
-        return 0,X,255
+        return (0,X,255)
     if 3 <= h < 4:
-        return 0,255,X
+        return (0,255,X)
     if 4 <= h < 5:
-        return X,255,0
+        return (X,255,0)
     if 5 <= h < 6:
-        return 255,X,0
+        return (255,X,0)
 
 def modulo_range(strip, beg: int, end: int):
     if beg > end:
@@ -45,7 +45,7 @@ def color_gradient(strip, beg: int, end: int, main_color: tuple):
 def bouncing_pulse(
     strip,
     segment_length: int = 12,
-    wait_ms: int = 50,
+    wait_ms: int = 100,
     iterations: int = 10,
     infinite: bool = True,
 ):
