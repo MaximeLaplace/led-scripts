@@ -1,7 +1,9 @@
 from .bogo import bogo
+from .bouncing_pulse import bouncing_pulse
 from .bubble_sort import bubble_sort
 from .cellular_automaton import cellular_automaton
 from .color_wipe import color_wipe
+from .impact import impact
 from .lamp import lamp
 from .pulse import pulse
 from .rainbow import rainbow
@@ -9,4 +11,3 @@ from .segment_strobo import segment_strobo
 from .strobo import strobo
 from .theater_chase import theater_chase
 from .theater_chase_rainbow import theater_chase_rainbow
-from .impact import impact
