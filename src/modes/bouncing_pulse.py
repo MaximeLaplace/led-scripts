@@ -44,7 +44,7 @@ def color_gradient(strip, beg: int, end: int, main_color: tuple):
 
 def bouncing_pulse(
     strip,
-    segment_length: int = 12,
+    segment_length: int = 7,
     wait_ms: int = 50,
     iterations: int = 10,
     infinite: bool = True,
