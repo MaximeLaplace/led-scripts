@@ -45,7 +45,7 @@ def color_gradient(strip, beg: int, end: int, main_color: tuple):
 def bouncing_pulse(
     strip,
     segment_length: int = 12,
-    wait_ms: int = 100,
+    wait_ms: int = 50,
     iterations: int = 10,
     infinite: bool = True,
 ):
@@ -61,7 +61,7 @@ def bouncing_pulse(
     fir_band_pos = (strip.numPixels()-segment_length//2, segment_length-segment_length//2) # center around zero
     sec_band_pos = (strip.numPixels()//2-segment_length//2, strip.numPixels()//2+segment_length-segment_length//2) # center around middle position
 
-    speeds = (10,-10)
+    speeds = (2,-2)
     h1, h2 = (randint(0,359), randint(0,359)) # random hues
     colors = [hue_to_rgb(h1), hue_to_rgb(h2)]
 
@@ -81,7 +81,7 @@ def bouncing_pulse(
                 fir_band_pos = tuple((bound-(speeds[0]//abs(speeds[0])))%strip.numPixels() for bound in fir_band_pos)
                 sec_band_pos = tuple((bound-(speeds[1]//abs(speeds[1])))%strip.numPixels() for bound in sec_band_pos)
             # random speed with opposite direction to previous speed
-            speeds = [-speed*randint(1,8)//abs(speed) for speed in speeds]
+            speeds = [-speed*randint(1,6)//abs(speed) for speed in speeds]
 
             h1, h2 = (randint(1,360), randint(1,360)) # random hues
             colors = [hue_to_rgb(h1), hue_to_rgb(h2)]  
