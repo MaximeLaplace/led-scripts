@@ -34,6 +34,13 @@ def overlap(
         if x in [y for y in modulo_range(strip,*band_2)]: return True
     return False
 
+def color_gradient(strip, beg: int, end: int, main_color: tuple):
+    r,b,g = main_color
+    segment_length = len(modulo_range(strip, beg, end))
+    return [(k*r//segment_length, k*b//segment_length, k*g//segment_length)
+        for k in list(range(1,segment_length,2)) + list(range(1,segment_length,2))[::-1]
+    ]
+
 
 def bouncing_pulse(
     strip,
@@ -80,10 +87,12 @@ def bouncing_pulse(
             colors = [hue_to_rgb(h1), hue_to_rgb(h2)]  
 
         # color leds
-        for index in modulo_range(strip,*fir_band_pos):
-            strip.setPixelColor(index, colors[0])
-        for index in modulo_range(strip,*sec_band_pos):
-            strip.setPixelColor(index, colors[1])
+        fir_colors = color_gradient(strip, *fir_band_pos, main_color=colors[0])
+        sec_colors = color_gradient(strip, *sec_band_pos, main_color=colors[1])
+        for ind, pos in enumerate(modulo_range(strip,*fir_band_pos)):
+            strip.setPixelColor(pos, fir_colors[ind])
+        for ind, pos in enumerate(modulo_range(strip,*sec_band_pos)):
+            strip.setPixelColor(pos, sec_colors[ind])
         
         strip.show()
         time.sleep(wait_ms / 1000.0)
