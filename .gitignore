@@ -1,5 +1,6 @@
 # mocked rpi_ws281x package
 rpi_ws281x/
+rpi_mock/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

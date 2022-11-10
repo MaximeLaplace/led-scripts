@@ -12,8 +12,6 @@ from config import (
 from rpi_ws281x import PixelStrip
 
 from .utils.create_inquirers import INQUIRERS
-from .utils.parse_user_inputs import parse_input
-
 
 class PixelSegment:
     def __init__(self, strip, start: int, end: int):

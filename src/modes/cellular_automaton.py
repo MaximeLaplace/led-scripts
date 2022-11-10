@@ -3,24 +3,7 @@ import time
 from rpi_ws281x import Color
 
 from .utils.init_time import init_time
-
-
-class CircularList(list):
-    """List but you can have index and slices out of range"""
-    def __getitem__(self, key):
-        if isinstance(key, slice ) :
-            # Get the start, stop, and step from the slice without ceiling the stop
-            start, stop, step = key.indices(10**6)
-            if stop < start and step > 0: # From left to right
-                return [self[i] for i in range(start,stop+len(self),step)]
-            elif stop > start and step < 0: # From right to left
-                return [self[i] for i in range(start+len(self),stop,step)]
-            else:
-                return [self[i] for i in range(start,stop,step)]
-        elif isinstance( key, int ) :
-            return super(CircularList, self).__getitem__(key % len(self))
-        else:
-            raise TypeError("Invalid argument type.")
+from .utils.circular_list import CircularList
 
 
 def tertiary_decomposition(x):
@@ -34,13 +17,13 @@ def tertiary_decomposition(x):
             x -= pow
         else:
             decomposition.append(0)
-    return decomposition
+    return decomposition[::-1] # To have the lower power on the left
 
 
 def cellular_automaton(
     strip,
-    color: tuple[int, int, int] = (127, 255, 0),
-    rule: int = 948,
+    color: tuple[int, int, int] = (255, 255, 0),
+    rule: int = 912,
     wait_ms: int = 50,
     duration_s: int = 10,
     infinite: bool = True,
@@ -57,27 +40,21 @@ def cellular_automaton(
     time_left = init_time(duration_s)
 
     r,b,g = color
-    main_color = Color(r,b,g)
-    gray_color = Color(r//2,b//2,g//2)
+    number_to_color = {
+        0: Color(0,0,0),
+        1: Color(r//2,b//2,g//2),
+        2: Color(r,b,g),
+    }
 
     leds_status = CircularList([1]*strip.numPixels()) # Array de 0,1,2
     leds_status[0] = 1 # Position initiale
-    leds_status[4] = 2
-    leds_status[6] = 1
 
-    tertiary = tertiary_decomposition(rule)[::-1]
+    tertiary = tertiary_decomposition(rule)
 
-    while time_left() or infinite:
+    while infinite or time_left():
         for i in range(strip.numPixels()):
             s = sum(leds_status[i-1:i+2])
-            if tertiary[s] == 2:
-                strip.setPixelColor(i, main_color)
-                leds_status[i] = 2
-            elif tertiary[s] == 1:
-                strip.setPixelColor(i, gray_color)
-                leds_status[i] = 1
-            else:
-                strip.setPixelColor(i, Color(0,0,0))
-                leds_status[i] = 0
+            strip.setPixelColor(i, number_to_color[tertiary[s]])
+            leds_status[i] = tertiary[s]
         strip.show()
         time.sleep(wait_ms / 1000.0)
