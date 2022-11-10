@@ -19,6 +19,21 @@ def impact(
     duration_s: int = 60,
     infinite: bool = False,
 ):
+    """Créée des impacts qui disparaissent petit à petit
+
+    Args:
+        color (tuple[int, int, int]) : couleur utilisée si le color_mode vaut "color"
+        impact_size (int): nombre de leds par impact = 2*impact_size + 1
+        fade_periods (int) : nombre de periodes nécessaires pour faire disparaitre un impact
+        new_each (int) : nombre de périodes avant chaque nouvel impact
+        wait_ms (int): durée d'une période
+        color_mode (str): "random" pour avoir des couleurs aléatoire, "color" pour avoir la couleur de color
+        min_speed (int) : vitess minimale des impacts
+        max_speed (int) : vitesse maximale des impacts
+        duration_s (int): durée du mode
+        infinite (bool): run le script à l'infini
+    """
+
     time_left = init_time(duration_s)
     num_pixels = strip.numPixels()
     active_impacts = [([], color)]*fade_periods
