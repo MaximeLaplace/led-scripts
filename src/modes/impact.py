@@ -14,6 +14,8 @@ def impact(
     new_each: int = 3,
     wait_ms: int = 100,
     color_mode: str = "random",
+    min_speed: int = 1,
+    max_speed: int = 1,
     duration_s: int = 60,
     infinite: bool = False,
 ):
@@ -25,6 +27,8 @@ def impact(
     while time_left() > 0 or infinite:
         if color_mode == "random":
             color = (randint(0, 255), randint(0, 255), randint(0, 255))
+        
+        speed = randint(min_speed, max_speed)
 
         active_impacts.pop(0)
 
@@ -42,11 +46,16 @@ def impact(
             else :
                 impact_zone.extend([i for i in range(center +1, num_pixels)])
                 impact_zone.extend([i for i in range(0, center + impact_size + 1 - num_pixels)])
-            active_impacts.append((impact_zone, color))
+            active_impacts.append((impact_zone, color, speed))
             periods_to_new = new_each - 1
         else:
-            active_impacts.append(([], color))
+            active_impacts.append(([], color, speed))
             periods_to_new -= 1
+
+        for i in range(fade_periods):
+            for j in range(len(active_impacts[i][0])):
+                active_impacts[i][0][j] += active_impacts[i][2]
+                active_impacts[i][0][j] %= num_pixels
         
         for i in range(fade_periods):
             for j in active_impacts[i][0]:
