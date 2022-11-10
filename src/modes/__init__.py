@@ -1,4 +1,5 @@
 from .bogo import bogo
+from .bouncing_pulse import bouncing_pulse
 from .bubble_sort import bubble_sort
 from .cellular_automaton import cellular_automaton
 from .color_wipe import color_wipe
