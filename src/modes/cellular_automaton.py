@@ -8,16 +8,16 @@ from .utils.circular_list import CircularList
 
 def tertiary_decomposition(x):
     decomposition = []
-    for pow in [3**k for k in range(6,-1,-1)]:
-        if x >= 2*pow:
+    for pow in [3**k for k in range(6, -1, -1)]:
+        if x >= 2 * pow:
             decomposition.append(2)
-            x -= 2*pow
+            x -= 2 * pow
         elif x >= pow:
             decomposition.append(1)
             x -= pow
         else:
             decomposition.append(0)
-    return decomposition[::-1] # To have the lower power on the left
+    return decomposition[::-1]  # To have the lower power on the left
 
 
 def cellular_automaton(
@@ -39,21 +39,21 @@ def cellular_automaton(
     """
     time_left = init_time(duration_s)
 
-    r,b,g = color
+    r, b, g = color
     number_to_color = {
-        0: Color(0,0,0),
-        1: Color(r//2,b//2,g//2),
-        2: Color(r,b,g),
+        0: Color(0, 0, 0),
+        1: Color(r // 2, b // 2, g // 2),
+        2: Color(r, b, g),
     }
 
-    leds_status = CircularList([1]*strip.numPixels()) # Array de 0,1,2
-    leds_status[0] = 1 # Position initiale
+    leds_status = CircularList([1] * strip.numPixels())  # Array de 0,1,2
+    leds_status[0] = 1  # Position initiale
 
     tertiary = tertiary_decomposition(rule)
 
     while infinite or time_left():
         for i in range(strip.numPixels()):
-            s = sum(leds_status[i-1:i+2])
+            s = sum(leds_status[i - 1 : i + 2])
             strip.setPixelColor(i, number_to_color[tertiary[s]])
             leds_status[i] = tertiary[s]
         strip.show()

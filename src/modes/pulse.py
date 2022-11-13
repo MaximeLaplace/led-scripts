@@ -20,18 +20,20 @@ def pulse(
         iterations (int): Le nombre de mouvement effectués
         infinite (bool): run le script à l'infini
     """
-    r,g,b = main_color
-    color_gradient = [ (k*r//segment_length, k*g//segment_length, k*b//segment_length)
-        for k in list(range(1,segment_length,2)) + list(range(1,segment_length,2))[::-1]
+    r, g, b = main_color
+    color_gradient = [
+        (k * r // segment_length, k * g // segment_length, k * b // segment_length)
+        for k in list(range(1, segment_length, 2))
+        + list(range(1, segment_length, 2))[::-1]
     ]
 
     while iterations > 0 or infinite:
         for i in range(strip.numPixels()):
             # reset the previous led
-            strip.setPixelColor((i-1)%strip.numPixels(), Color(0,0,0))
-            for q in range(10): # Length of the band
-                r,g,b = color_gradient[q]
-                strip.setPixelColor((i+q)%strip.numPixels(), Color(r,g,b))
+            strip.setPixelColor((i - 1) % strip.numPixels(), Color(0, 0, 0))
+            for q in range(10):  # Length of the band
+                r, g, b = color_gradient[q]
+                strip.setPixelColor((i + q) % strip.numPixels(), Color(r, g, b))
             strip.show()
             time.sleep(wait_ms / 1000.0)
 

@@ -13,6 +13,7 @@ from rpi_ws281x import PixelStrip
 
 from .utils.create_inquirers import INQUIRERS
 
+
 class PixelSegment:
     def __init__(self, strip, start: int, end: int):
         self._strip = strip
