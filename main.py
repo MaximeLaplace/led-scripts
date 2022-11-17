@@ -1,4 +1,5 @@
 import argparse
+import os
 
 from src.scripts.create_strip import create_strip
 from src.scripts.menu_selection import menu
@@ -22,6 +23,7 @@ if __name__ == "__main__":
         mode(strip, *args)
 
     except KeyboardInterrupt:
+        os.system("cls" if os.name == "nt" else "clear")
         if script_args.clear:
             strip.reset()
 
