@@ -20,11 +20,13 @@ def _theater_chase_controller(
         for j in range(iterations):
             for q in range(3):
                 for i in range(0, strip.numPixels(), 3):
-                    strip.setPixelColor(i + q, color)
+                    if i + q < strip.numPixels():
+                        strip.setPixelColor(i + q, color)
                 strip.show()
                 time.sleep(wait_ms / 1000.0)
                 for i in range(0, strip.numPixels(), 3):
-                    strip.setPixelColor(i + q, 0)
+                    if i + q < strip.numPixels():
+                        strip.setPixelColor(i + q, 0)
 
 
 def theater_chase(
