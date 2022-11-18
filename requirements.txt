@@ -4,3 +4,4 @@ pyfiglet
 pre-commit
 fastapi==0.87.0
 a2wsgi==1.6.0
+keyboard==0.13.5

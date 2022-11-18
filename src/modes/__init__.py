@@ -4,6 +4,7 @@ from .bubble_sort import bubble_sort
 from .cellular_automaton import cellular_automaton
 from .color_wipe import color_wipe
 from .demo import demo
+from .french_cancan import french_cancan
 from .impact import impact
 from .lamp import lamp
 from .pulse import pulse

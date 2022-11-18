@@ -1,3 +1,7 @@
+import sys
+
+from pynput.keyboard import Key, Listener
+
 from rpi_ws281x import Color
 
 from .bogo import bogo
@@ -16,33 +20,48 @@ from .theater_chase import theater_chase
 from .theater_chase_rainbow import theater_chase_rainbow
 
 
+def demo_run(strip):
+    def on_press(key):
+        if key == Key.space:
+            strobo(strip=strip, wait_ms=120, duration_s=10)
+
+    def on_release(key):
+        pass
+
+    # Collect events until released
+    with Listener(on_press=on_press, on_release=on_release) as listener:
+        while True:
+            rainbow(strip=strip, duration_s=10)
+
+            theater_chase_rainbow(strip=strip, duration_s=10)
+            rainbowDemo(strip=strip, duration_s=10)
+
+            impact(strip=strip, min_speed=0, max_speed=0, duration_s=5)
+            impact(strip=strip, min_speed=-1, max_speed=1, duration_s=5)
+            impact(strip=strip, min_speed=0, max_speed=2, duration_s=5)
+            impact(strip=strip, min_speed=-1, max_speed=1, duration_s=5)
+            impact(strip=strip, min_speed=-2, max_speed=0, duration_s=5)
+
+            try:
+                bouncing_pulse(strip=strip, iterations=300, infinite=False)
+            except:
+                pass
+
+            for _ in range(3):
+                theater_chase(strip=strip, color=(255, 0, 0), duration_s=1)
+                theater_chase(strip=strip, color=(125, 125, 0), duration_s=1)
+                theater_chase(strip=strip, color=(0, 255, 0), duration_s=1)
+                theater_chase(strip=strip, color=(0, 125, 125), duration_s=1)
+                theater_chase(strip=strip, color=(0, 0, 255), duration_s=1)
+                theater_chase(strip=strip, color=(125, 0, 125), duration_s=1)
+
+            strobo(strip=strip, wait_ms=120, duration_s=10)
+
+            color_wipe(strip=strip, color=(255, 0, 0), wait_ms=25, duration_s=2)
+            color_wipe(strip=strip, color=(0, 255, 0), wait_ms=25, duration_s=2)
+            color_wipe(strip=strip, color=(0, 0, 255), wait_ms=25, duration_s=2)
+            listener.join()
+
+
 def demo(strip):
-    while True:
-        rainbow(strip=strip, duration_s=10)
-        theater_chase_rainbow(strip=strip, duration_s=10)
-        rainbowDemo(strip=strip, duration_s=10)
-
-        impact(strip=strip, min_speed=0, max_speed=0, duration_s=5)
-        impact(strip=strip, min_speed=-1, max_speed=1, duration_s=5)
-        impact(strip=strip, min_speed=0, max_speed=2, duration_s=5)
-        impact(strip=strip, min_speed=-1, max_speed=1, duration_s=5)
-        impact(strip=strip, min_speed=-2, max_speed=0, duration_s=5)
-
-        try:
-            bouncing_pulse(strip=strip, iterations=300, infinite=False)
-        except:
-            pass
-
-        for _ in range(3):
-            theater_chase(strip=strip, color=(255, 0, 0), duration_s=1)
-            theater_chase(strip=strip, color=(125, 125, 0), duration_s=1)
-            theater_chase(strip=strip, color=(0, 255, 0), duration_s=1)
-            theater_chase(strip=strip, color=(0, 125, 125), duration_s=1)
-            theater_chase(strip=strip, color=(0, 0, 255), duration_s=1)
-            theater_chase(strip=strip, color=(125, 0, 125), duration_s=1)
-
-        strobo(strip=strip, wait_ms=120, duration_s=10)
-
-        color_wipe(strip=strip, color=(255, 0, 0), wait_ms=25, duration_s=2)
-        color_wipe(strip=strip, color=(0, 255, 0), wait_ms=25, duration_s=2)
-        color_wipe(strip=strip, color=(0, 0, 255), wait_ms=25, duration_s=2)
+    demo_run(strip)
