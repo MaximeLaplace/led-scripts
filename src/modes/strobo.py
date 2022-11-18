@@ -8,7 +8,7 @@ from .utils.init_time import init_time
 def strobo(
     strip,
     color: tuple[int, int, int] = (255, 255, 255),
-    wait_ms=50,
+    wait_ms: int = 50,
     duration_s: int = 10,
     infinite: bool = False,
 ):
