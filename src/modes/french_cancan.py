@@ -12,11 +12,11 @@ def french_cancan(
     time_left = init_time(duration_s)
 
     colors_mod = [
-        Color(0, 255, 0),
+        Color(255, 0, 0),
         Color(0, 0, 0),
         Color(125, 100, 125),
         Color(0, 0, 0),
-        Color(255, 0, 0),
+        Color(0, 255, 0),
         Color(0, 0, 0),
     ]
 
