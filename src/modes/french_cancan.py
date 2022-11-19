@@ -7,7 +7,7 @@ from .utils.rainbow import shift
 
 
 def french_cancan(
-    strip, wait_ms: int = 500, duration_s: int = 10, infinite: bool = True
+    strip, wait_ms: int = 50, duration_s: int = 10, infinite: bool = True
 ):
 
     time_left = init_time(duration_s)
@@ -18,7 +18,6 @@ def french_cancan(
         Color(125, 100, 125),
         Color(0, 0, 0),
         Color(255, 0, 0),
-        Color(0, 0, 0),
         Color(0, 0, 0),
     ]
 
