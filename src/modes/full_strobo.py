@@ -10,13 +10,15 @@ def full_strobo(strip, wait_ms: int = 100, duration_s: int = 10, infinite: bool 
     time_left = init_time(duration_s)
 
     light = True
+    offset = 0
     while time_left() > 0 or infinite:
-        for segment in strip.mode_segments:
-            if light:
-                for l in range(0, segment.numPixels(), 2):
+        if light:
+            for segment in strip.mode_segments:
+                for l in range(offset, segment.numPixels(), 2):
                     segment.setPixelColor(l, Color(125, 125, 125))
-            else:
-                strip.reset()
+        else:
+            strip.reset()
+            offset = offset * -1 + 1
         strip.show()
         time.sleep(wait_ms / 1000)
         light = not light
