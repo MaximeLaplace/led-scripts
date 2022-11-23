@@ -3,6 +3,7 @@ from typing import Callable
 
 import inquirer
 import pyfiglet
+
 from src.scripts.utils.create_inquirers import create_inquirers, get_function_parameters
 from src.scripts.utils.parse_user_inputs import parse_user_inputs
 
@@ -21,6 +22,8 @@ for key, value in after.items():
         and type(value).__name__ != "module"
     ):
         modes[key] = after[key]
+
+modes = dict(sorted(modes.items(), key=lambda item: item[0]))
 
 
 def menu() -> tuple[Callable[..., None], list[str]]:
