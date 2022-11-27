@@ -9,7 +9,7 @@ def slider_strobo(
     strip,
     color_begin: tuple[int, int, int] = (255, 255, 255),
     # color_end: tuple[int, int, int] = (255, 125, 125),
-    wait_ms: int = 5,
+    wait_ms: int = 10,
     duration_s: int = 10,
     infinite: bool = True,
 ):
@@ -25,15 +25,17 @@ def slider_strobo(
     segments = (1, 5)
 
     while time_left() > 0 or infinite:
-
-        for i in range(strip.segments[1].numPixels()):
+        num_pixel = strip.segments[1].numPixels()
+        for i in range(num_pixel):
             strip.segments[1].setPixelColor(i, Color(*color_begin))
-            strip.segments[5].setPixelColor(i, Color(*color_begin))
+            strip.segments[5].setPixelColor(num_pixel - i - 1, Color(*color_begin))
             time.sleep(wait_ms / 1000)
             strip.show()
 
-        strip.segments[1].setColor(Color(0, 0, 0))
-        strip.segments[5].setColor(Color(0, 0, 0))
-        strip.show()
+        for i in range(num_pixel):
+            strip.segments[1].setPixelColor(i, Color(0, 0, 0))
+            strip.segments[5].setPixelColor(num_pixel - i - 1, Color(0, 0, 0))
+            time.sleep(wait_ms / 1000)
+            strip.show()
 
     return
