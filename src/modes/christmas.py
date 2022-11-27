@@ -5,7 +5,7 @@ from rpi_ws281x import Color
 
 
 def sparkle(strip, sparkles, wait_ms: int = 50):
-    steps = 5
+    steps = 10
     intensities = [int(255 / steps * i) for i in range(1, steps + 1)]
     intensities.extend(intensities[:-1][::-1])
 
