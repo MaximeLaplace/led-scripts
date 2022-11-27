@@ -3,6 +3,32 @@ import time
 from rpi_ws281x import Color
 
 
+def color_gradient(segment_length: int, main_color: tuple):
+    """Gradient de couleur linéaire avec maximum au milieu et un offset pour ne pas avoir de valeurs trop sombres"""
+    r, b, g = main_color
+    offset = 3
+
+    if segment_length % 2 == 0:
+        return [
+            Color(
+                k * r // (segment_length + offset),
+                k * b // (segment_length + offset),
+                k * g // (segment_length + offset),
+            )
+            for k in list(range(1 + offset, segment_length + offset, 2))
+            + list(range(segment_length + offset - 1, offset, -2))
+        ]
+    return [
+        Color(
+            k * r // (segment_length + offset),
+            k * b // (segment_length + offset),
+            k * g // (segment_length + offset),
+        )
+        for k in list(range(1 + offset, segment_length + offset, 2))
+        + list(range(segment_length + offset, offset, -2))
+    ]
+
+
 def pulse(
     strip,
     main_color: tuple[int, int, int] = (255, 255, 0),
@@ -20,19 +46,12 @@ def pulse(
         iterations (int): Le nombre de mouvement effectués
         infinite (bool): run le script à l'infini
     """
-    r, g, b = main_color
-    color_gradient = [
-        (k * r // segment_length, k * g // segment_length, k * b // segment_length)
-        for k in list(range(1, segment_length, 2))
-        + list(range(1, segment_length, 2))[::-1]
-    ]
-
     while iterations > 0 or infinite:
         for i in range(strip.numPixels()):
             # reset the previous led
             strip.setPixelColor((i - 1) % strip.numPixels(), Color(0, 0, 0))
             for q in range(10):  # Length of the band
-                r, g, b = color_gradient[q]
+                r, g, b = color_gradient(segment_length, main_color)[q]
                 strip.setPixelColor((i + q) % strip.numPixels(), Color(r, g, b))
             strip.show()
             time.sleep(wait_ms / 1000.0)
