@@ -7,8 +7,9 @@ from .utils.init_time import init_time
 
 def slider_strobo(
     strip,
-    color_begin: tuple[int, int, int] = (255, 255, 255),
+    color_begin: tuple[int, int, int] = (125, 125, 125),
     # color_end: tuple[int, int, int] = (255, 125, 125),
+    length_slider: int = 25,
     wait_ms: int = 10,
     duration_s: int = 10,
     infinite: bool = True,
@@ -29,13 +30,19 @@ def slider_strobo(
         for i in range(num_pixel):
             strip.segments[1].setPixelColor(i, Color(*color_begin))
             strip.segments[5].setPixelColor(num_pixel - i - 1, Color(*color_begin))
-            time.sleep(wait_ms / 1000)
-            strip.show()
 
-        for i in range(num_pixel):
+            if i >= length_slider:
+                strip.segments[1].setPixelColor(i - length_slider, Color(0, 0, 0))
+                strip.segments[5].setPixelColor(
+                    num_pixel - (i - length_slider) - 1, Color(0, 0, 0)
+                )
+            strip.show()
+            time.sleep(wait_ms / 1000)
+
+        for i in range(num_pixel - length_slider, num_pixel):
             strip.segments[1].setPixelColor(i, Color(0, 0, 0))
             strip.segments[5].setPixelColor(num_pixel - i - 1, Color(0, 0, 0))
             time.sleep(wait_ms / 1000)
             strip.show()
-
+        time.sleep(25 * wait_ms / 1000)
     return
