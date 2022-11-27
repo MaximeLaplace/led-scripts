@@ -5,7 +5,6 @@ from .cellular_automaton import cellular_automaton
 from .color_wipe import color_wipe
 from .demo import demo
 from .french_cancan import french_cancan
-from .full_strobo import full_strobo
 from .impact import impact
 from .lamp import lamp
 from .pulse import pulse
