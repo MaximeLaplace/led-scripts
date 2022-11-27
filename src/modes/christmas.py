@@ -4,18 +4,18 @@ from random import random
 from rpi_ws281x import Color
 
 
-def sparkle(strip, indices, wait_ms: int = 50):
+def sparkle(strip, sparkles, wait_ms: int = 50):
     steps = 5
     intensities = [int(255 / steps * i) for i in range(1, steps + 1)]
     intensities.extend(intensities[:-1][::-1])
 
+    indices, offsets = zip(*sparkles)
+
     for p in intensities:
         for index in indices:
-            strip.setPixelColor(index - 2, Color(int(p / 4), int(p / 4), int(p / 4)))
-            strip.setPixelColor(index - 1, Color(int(p / 2), int(p / 2), int(p / 2)))
+            strip.setPixelColor(index - 1, Color(int(p / 6), int(p / 6), int(p / 6)))
             strip.setPixelColor(index, Color(p, p, p))
-            strip.setPixelColor(index + 1, Color(int(p / 2), int(p / 2), int(p / 2)))
-            strip.setPixelColor(index + 2, Color(int(p / 4), int(p / 4), int(p / 4)))
+            strip.setPixelColor(index + 1, Color(int(p / 6), int(p / 6), int(p / 6)))
 
         strip.show()
         time.sleep(wait_ms / 1000)
@@ -32,7 +32,8 @@ def christmas(strip, wait_ms: int = 50, sparkles_number: int = 10):
         indices = []
         for i in range(sparkles_number):
             index = int(random() * seg + seg * i)
-            indices.append(index)
+            offset = random() * 150 / 1000
+            indices.append((index, offset))
 
         sparkle(strip, indices, wait_ms=wait_ms)
 
