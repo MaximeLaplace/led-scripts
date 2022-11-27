@@ -9,8 +9,8 @@ def slider_strobo(
     strip,
     color_begin: tuple[int, int, int] = (125, 125, 125),
     # color_end: tuple[int, int, int] = (255, 125, 125),
-    length_slider: int = 25,
-    wait_ms: int = 10,
+    length_slider: int = 30,
+    wait_ms: int = 5,
     duration_s: int = 10,
     infinite: bool = True,
 ):
@@ -46,3 +46,8 @@ def slider_strobo(
             strip.show()
         time.sleep(25 * wait_ms / 1000)
     return
+
+
+# idées - vitesse aleatoire de defilement
+# - faire un dégradé de couleur entre couleur début et couleur fin
+# - faire un fade in fade out
