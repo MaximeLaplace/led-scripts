@@ -9,11 +9,12 @@ from random import choice
 
 def slider_strobo(
     strip,
-    colour_begin: tuple[int, int, int] = (125, 125, 125),
-    # color_end: tuple[int, int, int] = (255, 125, 125),
+    colour_begin: tuple[int, int, int] = (255, 0, 0),
+    colour_end: tuple[int, int, int] = (0, 255, 0),
     length_slider: int = 20,
     wait_ms: int = 5,
     duration_s: int = 10,
+    random_speeds: bool = False,
     infinite: bool = True,
 ):
     """Crée deux lignes qui s'étendent  sur les cotés et disparaissent
@@ -30,18 +31,43 @@ def slider_strobo(
     list_possible_waits = [
         wait_ms / 4 + k * (4 * wait_ms - wait_ms / 4) / 10 for k in range(10)
     ]
-    r, b, g = colour_begin
+
+    r_begin, b_begin, g_begin = colour_begin
+    r_end, b_end, g_end = colour_end
     colour_gradient = [
         (
-            k * r // (length_slider + 1),
-            k * b // (length_slider + 1),
-            k * g // (length_slider + 1),
+            int(
+                k
+                * (
+                    r_begin
+                    + ((length_slider + 1 - k) * (r_end - r_begin) / length_slider)
+                )
+                // (length_slider + 1)
+            ),
+            int(
+                k
+                * (
+                    b_begin
+                    + ((length_slider + 1 - k) * (b_end - b_begin) / length_slider)
+                )
+                // (length_slider + 1)
+            ),
+            int(
+                k
+                * (
+                    g_begin
+                    + ((length_slider + 1 - k) * (g_end - g_begin) / length_slider)
+                )
+                // (length_slider + 1)
+            ),
         )
         for k in range(length_slider + 1, 0, -1)
     ]
     while time_left() > 0 or infinite:
         num_pixel = strip.segments[1].numPixels()
-        current_wait = choice(list_possible_waits)
+        current_wait = wait_ms
+        if random_speeds:
+            current_wait = choice(list_possible_waits)
         for index_front in range(
             num_pixel
         ):  # index_front is the index of the beginning of the slider
