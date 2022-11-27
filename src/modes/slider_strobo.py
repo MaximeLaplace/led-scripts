@@ -4,12 +4,14 @@ from rpi_ws281x import Color
 
 from .utils.init_time import init_time
 
+from random import choice
+
 
 def slider_strobo(
     strip,
     colour_begin: tuple[int, int, int] = (125, 125, 125),
     # color_end: tuple[int, int, int] = (255, 125, 125),
-    length_slider: int = 30,
+    length_slider: int = 20,
     wait_ms: int = 5,
     duration_s: int = 10,
     infinite: bool = True,
@@ -24,6 +26,10 @@ def slider_strobo(
     time_left = init_time(duration_s)
 
     segments = (1, 5)
+
+    list_possible_waits = [
+        wait_ms / 4 + k * (4 * wait_ms - wait_ms / 4) / 10 for k in range(10)
+    ]
     r, b, g = colour_begin
     colour_gradient = [
         (
@@ -35,8 +41,13 @@ def slider_strobo(
     ]
     while time_left() > 0 or infinite:
         num_pixel = strip.segments[1].numPixels()
-        for index_front in range(num_pixel):
-            for index_stripe in range(min(index_front, length_slider)):
+        current_wait = choice(list_possible_waits)
+        for index_front in range(
+            num_pixel
+        ):  # index_front is the index of the beginning of the slider
+            for index_stripe in range(min(index_front + 1, length_slider)):
+                # we iterate through the length of the slider and use the gradient list for the colors
+                # we use the min to avoir going out of range when the slider is not completely full
                 strip.segments[1].setPixelColor(
                     index_front - index_stripe, Color(*colour_gradient[index_stripe])
                 )
@@ -53,22 +64,16 @@ def slider_strobo(
                     num_pixel - (index_front - length_slider) - 1, Color(0, 0, 0)
                 )
             strip.show()
-            time.sleep(wait_ms / 1000)
+            time.sleep(current_wait / 1000)
 
         for i in range(num_pixel - length_slider, num_pixel):
             strip.segments[1].setPixelColor(i, Color(0, 0, 0))
             strip.segments[5].setPixelColor(num_pixel - i - 1, Color(0, 0, 0))
-            time.sleep(wait_ms / 1000)
+            time.sleep(current_wait / 1000)
             strip.show()
         time.sleep(25 * wait_ms / 1000)
     return
 
 
-def gradient_at_position(index_beginning, length_slider, current_index, colour):
-
-    return color_at_position
-
-
 # idées - vitesse aleatoire de defilement
 # - faire un dégradé de couleur entre couleur début et couleur fin
-# - faire un fade in fade out
