@@ -10,7 +10,7 @@ def segment_strobo(
     color: tuple[int, int, int] = (255, 255, 255),
     wait_ms: int = 50,
     duration_s: int = 10,
-    infinite: bool = False,
+    infinite: bool = True,
 ):
     time_left = init_time(duration_s)
 

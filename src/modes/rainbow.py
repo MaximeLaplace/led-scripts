@@ -8,7 +8,7 @@ def rainbow(
     strip,
     wait_ms: int = 50,
     duration_s: int = 10,
-    infinite: bool = False,
+    infinite: bool = True,
 ):
     """Allume la bande en arc-en-ciel qui tourne lentement
 

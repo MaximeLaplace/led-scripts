@@ -27,7 +27,7 @@ def bubble_sort_array(array):
         yield [color for _, color in new_array]
 
 
-def bubble_sort(strip, wait_ms: int = 2, rounds: int = 1, infinite: bool = False):
+def bubble_sort(strip, wait_ms: int = 2, rounds: int = 1, infinite: bool = True):
     rainbow_array = list(enumerate(create_rainbow_array(strip)))
     random.shuffle(rainbow_array)
 

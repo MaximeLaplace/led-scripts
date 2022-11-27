@@ -9,7 +9,7 @@ def _bogo_controller(
     strip,
     wait_ms: int = 100,
     duration_s: int = 10,
-    infinite: bool = False,
+    infinite: bool = True,
 ):
     time_left = init_time(duration_s)
     rainbow_array = create_rainbow_array(strip)

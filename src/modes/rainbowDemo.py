@@ -5,12 +5,13 @@ from .utils.init_time import init_time
 from .utils.rainbow import create_rainbow_array, shift
 from .utils.rainbowDemo import shrink, overlay, mix, color_array, half
 
+
 def rainbowDemo(
     strip,
     wait_ms: int = 50,
     duration_s: int = 10,
-    infinite: bool = False,
-) :
+    infinite: bool = True,
+):
     rainbow_array = create_rainbow_array(strip)
     half_rainbow_array = create_rainbow_array(strip)
     half(half_rainbow_array)
