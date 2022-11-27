@@ -1,6 +1,6 @@
 import sys
 
-sys.path.insert(0, "/var/www/led-app")
+sys.path.insert(0, "/var/www/led-app/led-scripts")
 
 activate = "/Documents/led-scripts/.venv/bin/activate"
 
