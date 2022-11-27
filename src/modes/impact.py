@@ -18,7 +18,7 @@ def impact(
     min_speed: int = 1,
     max_speed: int = 1,
     duration_s: int = 60,
-    infinite: bool = False,
+    infinite: bool = True,
 ):
     """Créée des impacts qui disparaissent petit à petit
 

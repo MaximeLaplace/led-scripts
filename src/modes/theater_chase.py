@@ -11,7 +11,7 @@ def _theater_chase_controller(
     wait_ms=50,
     iterations=10,
     duration_s: int = 10,
-    infinite: bool = False,
+    infinite: bool = True,
 ):
     """Movie theater light style chaser animation."""
     time_left = init_time(duration_s)

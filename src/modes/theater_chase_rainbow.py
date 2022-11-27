@@ -5,7 +5,7 @@ from .utils.rainbow import create_rainbow_array, shift
 
 
 def theater_chase_rainbow(
-    strip, wait_ms: int = 50, duration_s: int = 10, infinite: bool = False
+    strip, wait_ms: int = 50, duration_s: int = 10, infinite: bool = True
 ):
     """Des petites lights qui tournent en étant en arc-en-ciel
 

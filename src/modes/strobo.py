@@ -10,7 +10,7 @@ def strobo(
     color: tuple[int, int, int] = (255, 255, 255),
     wait_ms: int = 50,
     duration_s: int = 10,
-    infinite: bool = False,
+    infinite: bool = True,
 ):
     """Crée un strobo
 
@@ -26,7 +26,7 @@ def strobo(
 
     while time_left() > 0 or infinite:
         for segment in segments:
-            (strip.segments[s].setColor(0) for s in segments)
+            (strip.segments[s].setColor(Color(0)) for s in segments)
 
             for i in range(offset, strip.segments[segment].numPixels(), 2):
                 strip.segments[segment].setPixelColor(i, Color(*color))
