@@ -1,4 +1,5 @@
 import inquirer
+
 from config import (
     BREAKPOINTS,
     LED_BRIGHTNESS,
@@ -19,16 +20,41 @@ class PixelSegment:
         self._strip = strip
         self._start = start
         self._end = end
+        self._colors = [0 for i in range(start, end)]
 
     def numPixels(self):
         return self._end - self._start
 
+    def getColors(self):
+        return [color for color in self]
+
     def setPixelColor(self, index: int, color):
+        self._colors[index] = color
         self._strip.setPixelColor(index + self._start, color)
 
     def setColor(self, color):
+        self._colors = [color for i in range(self.numPixels())]
         for i in range(self.numPixels()):
             self.setPixelColor(i, color)
+
+    def setArrayColor(self, color_array):
+        if self.numPixels() != len(color_array):
+            raise (
+                ValueError(
+                    f"L'array de couleur n'a pas autant de couleurs ({len(color_array)} couleurs) qu'il y a de LED sur la bande ({self.numPixels()} LEDs) !"
+                )
+            )
+        for i in range(self.numPixels()):
+            self._colors[i] = color_array[i]
+            self.setPixelColor(i, color_array[i])
+
+    def shiftColors(self, direction: int = 1):
+        if direction == -1:
+            self._colors.append(self._colors.pop(0))
+        else:
+            self._colors.insert(0, self._colors.pop(-1))
+
+        self.setArrayColor(self._colors)
 
 
 class PixelStripWithSegments(PixelStrip):
