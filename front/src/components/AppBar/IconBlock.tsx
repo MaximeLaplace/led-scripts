@@ -1,37 +1,44 @@
 import React from 'react';
 
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { NavItem } from '../../types/drawer';
 
-const styles = {
-  alignItems: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  marginTop: '2px',
-  padding: '5px',
-  width: '100px'
-};
+import { IconButton } from './IconButton';
 
 type Props = {
-  navItems: NavItem[];
+  displayLabels?: boolean;
+  navItems: Record<string, NavItem[]>;
   position: 'left' | 'right';
 };
 
-const IconBlock = ({ navItems, position }: Props) => (
-  <Box sx={{ flexGrow: position === 'left' ? 1 : 0 }}>
-    {navItems
-      .filter((navItem) => navItem.position === position)
-      .map((navItem) => (
-        <Button key={navItem.label} sx={{ color: '#fff' }}>
-          <Box sx={styles}>
-            {navItem.icon}
-            {navItem.label}
-          </Box>
-        </Button>
-      ))}
-  </Box>
-);
+const IconBlock = ({ navItems, position, displayLabels = true }: Props) => {
+  return (
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        {navItems.left
+          .filter((navItem) => navItem.position === position)
+          .map((navItem) => (
+            <IconButton
+              key={navItem.label}
+              label={displayLabels ? navItem.label : ''}
+              icon={navItem.icon}
+            />
+          ))}
+      </Box>
+      <Box>
+        {navItems.right
+          .filter((navItem) => navItem.position === position)
+          .map((navItem) => (
+            <IconButton
+              key={navItem.label}
+              label={displayLabels ? navItem.label : ''}
+              icon={navItem.icon}
+            />
+          ))}
+      </Box>
+    </>
+  );
+};
 
 export { IconBlock };
