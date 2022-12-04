@@ -1,10 +1,9 @@
 import time
+from random import choice
 
 from rpi_ws281x import Color
 
 from .utils.init_time import init_time
-
-from random import choice
 
 
 def slider_strobo(
@@ -73,7 +72,7 @@ def slider_strobo(
         ):  # index_front is the index of the beginning of the slider
             for index_stripe in range(min(index_front + 1, length_slider)):
                 # we iterate through the length of the slider and use the gradient list for the colors
-                # we use the min to avoir going out of range when the slider is not completely full
+                # we use the min to avoid going out of range when the slider is not completely full
                 strip.segments[1].setPixelColor(
                     index_front - index_stripe, Color(*colour_gradient[index_stripe])
                 )
@@ -92,14 +91,15 @@ def slider_strobo(
             strip.show()
             time.sleep(current_wait / 1000)
 
-        for i in range(num_pixel - length_slider, num_pixel):
-            strip.segments[1].setPixelColor(i, Color(0, 0, 0))
-            strip.segments[5].setPixelColor(num_pixel - i - 1, Color(0, 0, 0))
+        for i in range(0, length_slider):
+            strip.segments[1].shiftColors()
+            strip.segments[5].shiftColors(direction=-1)
+
+            strip.segments[1].setPixelColor(0, Color(0, 0, 0))
+            strip.segments[5].setPixelColor(
+                strip.segments[5].numPixels() - 1, Color(0, 0, 0)
+            )
             time.sleep(current_wait / 1000)
             strip.show()
         time.sleep(25 * wait_ms / 1000)
     return
-
-
-# idées - vitesse aleatoire de defilement
-# - faire un dégradé de couleur entre couleur début et couleur fin
