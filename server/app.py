@@ -1,4 +1,12 @@
-from flask import Flask, render_template
+import json
+import time
+from multiprocessing import Process
+from multiprocessing.managers import BaseManager
+
+from flask import Flask, Response, render_template
+from flask_cors import CORS
+
+from .src.routers.start_mode import start_mode_bp
 
 app = Flask(
     __name__,
@@ -7,25 +15,37 @@ app = Flask(
     template_folder="../front/build",
 )
 
+cors = CORS(app)
+
+app.register_blueprint(start_mode_bp)
+
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-class CustomManager(BaseManager):
-    pass
+@app.route("/stop")
+def stop():
+    global process
+    s = f"process.is_alive before closing : {process.is_alive()}"
+
+    if process.is_alive():
+        process.kill()
+        process = Process(target=work)
+
+    return s
 
 
-CustomManager.register("Mode", Mode)
+@app.route("/start")
+def start():
+    global process
+    response = Response(f"process.is_alive before starting : {process.is_alive()}")
 
+    @response.call_on_close
+    def on_close(process=process):
+        if not process.is_alive():
+            process.start()
+            process.join()
 
-def work(shared_mode):
-    while True:
-        print(f"shared_modes is at list length : {shared_mode.get()}")
-        time.sleep(1)
-
-
-if __name__ == "__main__":
-
-    app.run(port=5555)
+    return response

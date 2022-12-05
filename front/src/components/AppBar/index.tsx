@@ -15,13 +15,13 @@ import { IconBlock } from './IconBlock';
 const NAV_ITEMS: Record<string, NavItem[]> = {
   left: [
     {
-      icon: <TuneIcon />,
-      label: 'LIVE',
+      icon: <AppsIcon />,
+      label: 'PRESETS',
       position: 'left'
     },
     {
-      icon: <AppsIcon />,
-      label: 'PRESETS',
+      icon: <TuneIcon />,
+      label: 'LIVE',
       position: 'left'
     },
     {

@@ -153,16 +153,21 @@ _ALL_LED = "Toutes les LED"
 _CUSTOM_LED = "Custom"
 
 
-def create_strip():
-    questions = [
-        inquirer.List(
-            "strip_type",
-            message="Quelles LED voulez vous utiliser ?",
-            choices=[_ALL_LED, _UPPER_LED, _CUSTOM_LED],
-            carousel=True,
-        )
-    ]
-    led_to_address = inquirer.prompt(questions)["strip_type"]
+def create_strip(choice: str = None):
+    led_to_address = ""
+
+    if choice is None:
+        questions = [
+            inquirer.List(
+                "strip_type",
+                message="Quelles LED voulez vous utiliser ?",
+                choices=[_ALL_LED, _UPPER_LED, _CUSTOM_LED],
+                carousel=True,
+            )
+        ]
+        led_to_address = inquirer.prompt(questions)["strip_type"]
+    else:
+        led_to_address = choice
 
     if led_to_address == _ALL_LED:
         return _generate_strip()
@@ -183,3 +188,5 @@ def create_strip():
         )["segments"]
 
         return _generate_strip(tuple(segments))
+
+    return _generate_strip()
