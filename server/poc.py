@@ -3,21 +3,12 @@ import time
 from multiprocessing import Process
 from multiprocessing.managers import BaseManager
 
-from flask import Flask
+from flask import Flask, Response
+
+from src.routers.start_mode import start_mode_bp
 
 app = Flask(__name__)
-
-
-@app.route("/add")
-def add():
-    shared_mode.add()
-    return f"Home sweet home! (and {shared_mode.get()})"
-
-
-@app.route("/substract")
-def sub():
-    shared_mode.substract()
-    return f"Home sweet home! (and {shared_mode.get()})"
+app.register_blueprint(start_mode_bp)
 
 
 class Mode:
@@ -47,18 +38,44 @@ class CustomManager(BaseManager):
 CustomManager.register("Mode", Mode)
 
 
-def work(shared_mode):
+def work():
     while True:
-        print(f"shared_modes is at list length : {shared_mode.get()}")
+        print(f"process running")
         time.sleep(1)
 
 
+def initialize_process():
+    return {"is_started": False, "process": Process(target=work)}
+
+
+process = Process(target=work)
+
+
+@app.route("/stop")
+def stop():
+    global process
+    s = f"process.is_alive before closing : {process.is_alive()}"
+
+    if process.is_alive():
+        process.kill()
+        process = Process(target=work)
+
+    return s
+
+
+@app.route("/start")
+def start():
+    global process
+    response = Response(f"process.is_alive before starting : {process.is_alive()}")
+
+    @response.call_on_close
+    def on_close(process=process):
+        if not process.is_alive():
+            process.start()
+            process.join()
+
+    return response
+
+
 if __name__ == "__main__":
-    with CustomManager() as manager:
-        shared_mode = manager.Mode()
-
-        process = Process(target=work, args=(shared_mode,))
-
-        process.start()
-        app.run(debug=True, use_reloader=False)
-        process.join()
+    app.run(debug=True, use_reloader=False)
