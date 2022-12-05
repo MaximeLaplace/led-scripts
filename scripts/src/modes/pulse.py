@@ -10,7 +10,7 @@ def color_gradient(segment_length: int, main_color: tuple):
 
     if segment_length % 2 == 0:
         return [
-            Color(
+            (
                 k * r // (segment_length + offset),
                 k * b // (segment_length + offset),
                 k * g // (segment_length + offset),
@@ -19,7 +19,7 @@ def color_gradient(segment_length: int, main_color: tuple):
             + list(range(segment_length + offset - 1, offset, -2))
         ]
     return [
-        Color(
+        (
             k * r // (segment_length + offset),
             k * b // (segment_length + offset),
             k * g // (segment_length + offset),
