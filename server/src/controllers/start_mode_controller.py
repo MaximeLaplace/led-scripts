@@ -1,6 +1,8 @@
 from flask import Response
 
-from .modes_controller import modes, modes_process, reload_modes_process
+import server.src.globals as globals_
+
+from .modes_controller import modes, reload_modes_process
 
 
 def get_modes():
@@ -8,14 +10,12 @@ def get_modes():
 
 
 def start_mode_controller(mode: str):
-    global modes_process
-
     reload_modes_process(mode)
 
     response = Response()
 
     @response.call_on_close
-    def on_close(process=modes_process):
+    def on_close(process=globals_.modes_process):
         print("starting mode with mode : ", mode)
         if not process.is_alive():
             process.start()
