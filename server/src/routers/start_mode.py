@@ -1,6 +1,4 @@
-import json
-
-from flask import Blueprint, Response, request
+from flask import Blueprint, request
 
 from server.src.controllers.start_mode_controller import (
     get_modes,

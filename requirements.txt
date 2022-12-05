@@ -5,3 +5,4 @@ pre-commit
 a2wsgi==1.6.0
 keyboard==0.13.5
 flask==2.2.2
+flask-cors==3.0.10
