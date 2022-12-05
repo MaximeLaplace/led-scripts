@@ -4,18 +4,13 @@ import { NavItem } from '@ledapp/types/drawer';
 import AppsIcon from '@mui/icons-material/Apps';
 import FlashOnIcon from '@mui/icons-material/FlashOn';
 import LogoutIcon from '@mui/icons-material/Logout';
-import MenuIcon from '@mui/icons-material/Menu';
 import TuneIcon from '@mui/icons-material/Tune';
-import { Fab } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 
 import { useBreakpoints } from '../../hooks/useBreakpoints';
-import { useMobileDrawer } from '../../hooks/useMobileDrawer';
 
 import { IconBlock } from './IconBlock';
-import { IconButton } from './IconButton';
-import { MobileDrawer } from './MobileDrawer';
 
 const NAV_ITEMS: Record<string, NavItem[]> = {
   left: [
@@ -45,8 +40,6 @@ const NAV_ITEMS: Record<string, NavItem[]> = {
 };
 
 const AppBar = () => {
-  const { isDrawerOpen, toggleDrawer } = useMobileDrawer();
-
   const { isSmOrBigger } = useBreakpoints();
 
   return (
@@ -67,22 +60,6 @@ const AppBar = () => {
       </Toolbar>
     </MuiAppBar>
   );
-  // <>
-  //   <Fab
-  //     aria-label="menu"
-  //     sx={{
-  //       position: 'fixed',
-  //       margin: 4,
-  //       bottom: '10px',
-  //       backgroundColor: '#232323'
-  //     }}
-  //     color="info"
-  //     onClick={toggleDrawer}
-  //   >
-  //     <MenuIcon />
-  //   </Fab>
-  // </>
-  // );
 };
 
 export { AppBar };
