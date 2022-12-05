@@ -1,9 +1,9 @@
 import argparse
 import os
 
-from src.scripts.create_strip import create_strip
-from src.scripts.menu_selection import menu
-from src.scripts.utils.new_terminal_section import new_terminal_section
+from scripts.src.startup_scripts.create_strip import create_strip
+from scripts.src.startup_scripts.menu_selection import menu
+from scripts.src.startup_scripts.utils.new_terminal_section import new_terminal_section
 
 if __name__ == "__main__":
     # Process arguments

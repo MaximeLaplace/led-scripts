@@ -25,7 +25,7 @@ def bogo(
     strip,
     wait_ms: int = 100,
     durations_s: int = 10,
-    infinite: bool = False,
+    infinite: bool = True,
 ):
     """crée un arc-en-ciel et le mélange en bogo sort
 

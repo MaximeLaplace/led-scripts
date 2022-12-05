@@ -2,13 +2,12 @@ from typing import Callable
 
 import inquirer
 
-from src.scripts.utils.create_inquirers import create_inquirers, get_function_parameters
-from src.scripts.utils.parse_user_inputs import parse_user_inputs
-
+from .utils.create_inquirers import create_inquirers, get_function_parameters
 from .utils.new_terminal_section import new_terminal_section
+from .utils.parse_user_inputs import parse_user_inputs
 
 before = globals().copy()
-from src.modes import *
+from scripts.src.modes import *
 
 after = globals().copy()
 
