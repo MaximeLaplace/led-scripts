@@ -1,8 +1,6 @@
-import os
 from typing import Callable
 
 import inquirer
-import pyfiglet
 
 from src.scripts.utils.create_inquirers import create_inquirers, get_function_parameters
 from src.scripts.utils.parse_user_inputs import parse_user_inputs

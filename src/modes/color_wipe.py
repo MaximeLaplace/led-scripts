@@ -26,7 +26,7 @@ def color_wipe(
     color: tuple[int, int, int] = (255, 0, 0),
     wait_ms: int = 50,
     duration_s: int = 10,
-    infinite: bool = False,
+    infinite: bool = True,
 ):
     """Allume la bande lumineuse progressivement
 
