@@ -35,7 +35,7 @@ def theater_chase(
     wait_ms: int = 50,
     iterations: int = 10,
     duration_s: int = 10,
-    infinite: bool = False,
+    infinite: bool = True,
 ):
     """Des petites lights qui tournent en étant d'une couleur au choix
 
