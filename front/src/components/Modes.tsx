@@ -14,30 +14,9 @@ export const Modes = () => {
         url: '/start_mode',
         method: 'GET'
       });
-      console.log(data);
       setModes(data);
     };
-    setModes([
-      'bogo',
-      'bouncing_pulse',
-      'bubble_sort',
-      'cellular_automaton',
-      'christmas',
-      'color_wipe',
-      'demo',
-      'french_cancan',
-      'impact',
-      'lamp',
-      'pulse',
-      'rainbow',
-      'rainbowDemo',
-      'segment_strobo',
-      'slider_strobo',
-      'strobo',
-      'theater_chase',
-      'theater_chase_rainbow'
-    ]);
-    // get();
+    get();
   }, []);
 
   const startMode = (mode: string) => () => {
@@ -54,15 +33,17 @@ export const Modes = () => {
     <>
       <TitleDivider title="Modes" />
       <Grid container spacing={4} justifyContent="center">
-        {modes.length
-          ? modes.map((mode) => (
-              <Grid key={mode} item xs={8} sm={3}>
-                <Button variant="contained" fullWidth onClick={startMode(mode)}>
-                  {mode}
-                </Button>
-              </Grid>
-            ))
-          : 'Loading modes...'}
+        {modes.length ? (
+          modes.map((mode) => (
+            <Grid key={mode} item xs={8} sm={3}>
+              <Button variant="contained" fullWidth onClick={startMode(mode)}>
+                {mode}
+              </Button>
+            </Grid>
+          ))
+        ) : (
+          <Grid item>Loading modes...</Grid>
+        )}
       </Grid>
     </>
   );

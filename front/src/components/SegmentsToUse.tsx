@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import {
@@ -19,12 +19,28 @@ const ToggleButton = styled(MuiToggleButton)({
   }
 });
 
+type SegmentsOptions = 'top' | 'all';
+
 export const SegmentsToUse = () => {
-  const [segmentsToUse, setSegmentsToUse] = React.useState('top');
+  const [segmentsToUse, setSegmentsToUse] = useState<SegmentsOptions | null>(
+    null
+  );
+
+  useEffect(() => {
+    const get = async () => {
+      const { data } = await axios({
+        url: '/segments_to_use',
+        method: 'GET'
+      });
+      console.log(data);
+      setSegmentsToUse(data);
+    };
+    get();
+  }, []);
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
-    newSegmentsToUse: string
+    newSegmentsToUse: SegmentsOptions
   ) => {
     if (newSegmentsToUse !== null) {
       const oldSegmentsToUse = segmentsToUse;
@@ -39,21 +55,23 @@ export const SegmentsToUse = () => {
   };
 
   return (
-    <>
-      <TitleDivider title="Segments to use" />
-      <Grid container justifyContent="center" sx={{ marginBottom: '20px' }}>
-        <Grid item justifyContent="center">
-          <ToggleButtonGroup
-            color="primary"
-            value={segmentsToUse}
-            exclusive
-            onChange={handleChange}
-          >
-            <ToggleButton value="top">Top segments</ToggleButton>
-            <ToggleButton value="all">All segments</ToggleButton>
-          </ToggleButtonGroup>
+    segmentsToUse && (
+      <>
+        <TitleDivider title="Segments to use" />
+        <Grid container justifyContent="center" sx={{ marginBottom: '20px' }}>
+          <Grid item justifyContent="center">
+            <ToggleButtonGroup
+              color="primary"
+              value={segmentsToUse}
+              exclusive
+              onChange={handleChange}
+            >
+              <ToggleButton value="top">Top segments</ToggleButton>
+              <ToggleButton value="all">All segments</ToggleButton>
+            </ToggleButtonGroup>
+          </Grid>
         </Grid>
-      </Grid>
-    </>
+      </>
+    )
   );
 };
