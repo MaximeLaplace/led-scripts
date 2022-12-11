@@ -148,8 +148,8 @@ def _generate_strip(segments: tuple[int] = (0, 1, 2, 3, 4, 5, 6, 7)):
     return strip
 
 
-_UPPER_LED = "Uniquement le carré de LED du haut"
-_ALL_LED = "Toutes les LED"
+UPPER_LED = "Uniquement le carré de LED du haut"
+ALL_LED = "Toutes les LED"
 _CUSTOM_LED = "Custom"
 
 
@@ -161,7 +161,7 @@ def create_strip(choice: str = None):
             inquirer.List(
                 "strip_type",
                 message="Quelles LED voulez vous utiliser ?",
-                choices=[_ALL_LED, _UPPER_LED, _CUSTOM_LED],
+                choices=[ALL_LED, UPPER_LED, _CUSTOM_LED],
                 carousel=True,
             )
         ]
@@ -169,10 +169,10 @@ def create_strip(choice: str = None):
     else:
         led_to_address = choice
 
-    if led_to_address == _ALL_LED:
+    if led_to_address == ALL_LED:
         return _generate_strip()
 
-    if led_to_address == _UPPER_LED:
+    if led_to_address == UPPER_LED:
         return _generate_strip((1, 2, 5, 6))
 
     if led_to_address == _CUSTOM_LED:

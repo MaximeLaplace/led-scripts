@@ -21,25 +21,25 @@ for key, value in after.items():
 modes = dict(sorted(modes.items(), key=lambda item: item[0]))
 
 
-def work_factory(mode: str):
-    def work():
-        modes[mode](globals_.strip)
-
-    return work
-
-
-def work(mode: str):
+def work(mode: str, segments_to_use: str):
+    strip = create_strip(segments_to_use)
+    strip.reset()
     while True:
-        modes[mode](globals_.strip)
+        modes[mode](strip)
         time.sleep(1)
 
 
 def reload_modes_process(mode: str):
-    print("reloading modes process")
+    globals_.current_mode = mode
 
     if globals_.modes_process.is_alive():
-        print("killing modes process")
         globals_.modes_process.kill()
-        globals_.strip.reset()
+        # globals_.strip.reset()
 
-    globals_.modes_process = Process(target=work, args=(mode,))
+    globals_.modes_process = Process(
+        target=work,
+        args=(
+            mode,
+            globals_.segments_to_use,
+        ),
+    )

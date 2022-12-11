@@ -16,7 +16,6 @@ def start_mode_controller(mode: str):
 
     @response.call_on_close
     def on_close(process=globals_.modes_process):
-        print("starting mode with mode : ", mode)
         if not process.is_alive():
             process.start()
             process.join()
