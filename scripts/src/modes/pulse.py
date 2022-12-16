@@ -33,7 +33,7 @@ def pulse(
     strip,
     main_color: tuple[int, int, int] = (255, 255, 0),
     segment_length: int = 12,
-    wait_ms: int = 30,
+    wait_ms: int = 5,
     iterations: int = 10,
     infinite: bool = True,
 ):
