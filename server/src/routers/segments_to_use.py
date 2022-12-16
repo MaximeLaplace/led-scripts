@@ -1,6 +1,5 @@
 from flask import Blueprint
 
-import server.src.globals as globals_
 from server.src.controllers.segments_to_use_controller import (
     get_segments_to_use,
     update_segments_to_use_controller,

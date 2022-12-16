@@ -32,7 +32,6 @@ export const SegmentsToUse = () => {
         url: '/segments_to_use',
         method: 'GET'
       });
-      console.log(data);
       setSegmentsToUse(data);
     };
     get();
