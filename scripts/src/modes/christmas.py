@@ -23,7 +23,7 @@ def sparkle(strip, sparkles, wait_ms: int = 50):
     strip.show()
 
 
-def christmas(strip, wait_ms: int = 50, sparkles_number: int = 10):
+def christmas(strip, wait_ms: int = 10, sparkles_number: int = 10):
     while True:
         strip.reset()
         length = strip.numPixels()

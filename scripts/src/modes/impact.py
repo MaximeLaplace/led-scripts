@@ -13,7 +13,7 @@ def impact(
     impact_size: int = 3,
     fade_periods: int = 20,
     new_each: int = 3,
-    wait_ms: int = 100,
+    wait_ms: int = 20,
     color_mode: str = "random",
     min_speed: int = 1,
     max_speed: int = 1,

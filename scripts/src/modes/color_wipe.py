@@ -6,7 +6,7 @@ from .utils.init_time import init_time
 
 
 def _color_wipe_controller(
-    strip, color, wait_ms=50, duration_s: int = 10, infinite: bool = True
+    strip, color, wait_ms=5, duration_s: int = 10, infinite: bool = True
 ):
     time_left = init_time(duration_s)
 
