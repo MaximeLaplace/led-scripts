@@ -16,6 +16,7 @@ def segment_strobo(
 
     index = 0
     length = len(strip.mode_segments)
+    print(strip.mode_segments)
 
     while time_left() > 0 or infinite:
         for i in range(length):
