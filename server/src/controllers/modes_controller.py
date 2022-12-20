@@ -33,12 +33,12 @@ def work(mode: str, segments_to_use: str, speed_factor: int = 1):
 
     defaults = modes[mode].__defaults__
 
-    try:
+    if "wait_ms" in args:
         wait_ms_index = args.index("wait_ms")
         wait_ms = max(int(defaults[wait_ms_index] / speed_factor), 1)
 
         modes[mode](strip, wait_ms=wait_ms)
-    except:
+    else:
         modes[mode](strip)
 
 

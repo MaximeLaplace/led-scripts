@@ -64,18 +64,18 @@ def gradient_blink(
     while time_left() > 0 or infinite:
         strip.reset()
         for color in colour_gradient:
-            strip.mode_segments[1].setColor(Color(*color))
-            strip.mode_segments[5].setColor(Color(*color))
+            strip.segments[1].setColor(Color(*color))
+            strip.segments[5].setColor(Color(*color))
             strip.show()
             time.sleep(current_wait/1000)
         time.sleep(current_wait/1000)
         strip.reset()
         for color in colour_gradient:
-            strip.mode_segments[2].setColor(Color(*color))
-            strip.mode_segments[6].setColor(Color(*color))
+            strip.segments[2].setColor(Color(*color))
+            strip.segments[6].setColor(Color(*color))
             strip.show()
             time.sleep(current_wait/1000)
         strip.show()
-        time.sleep(current_wait/1000)    
+        time.sleep(current_wait/1000)
 
     return
