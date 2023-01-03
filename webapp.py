@@ -12,5 +12,7 @@ s.close()
 
 
 if __name__ == "__main__":
+    print("sending ip")
     send_ip(f"{IP_ADDRESS}:{5000}")
+    print("ip sent")
     application.run(debug=True, use_reloader=True)
