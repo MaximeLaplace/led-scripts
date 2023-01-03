@@ -6,3 +6,7 @@ IP_ADDRESS = s.getsockname()[0]
 s.close()
 
 print(IP_ADDRESS)
+
+from telegrambot.send_message import send_ip
+
+send_ip(f"{IP_ADDRESS}:{5000}")
