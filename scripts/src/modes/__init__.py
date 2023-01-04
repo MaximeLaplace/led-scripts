@@ -17,3 +17,4 @@ from .strobo import strobo
 from .theater_chase import theater_chase
 from .theater_chase_rainbow import theater_chase_rainbow
 from .gradient_blink import gradient_blink
+from .blackout import blackout
