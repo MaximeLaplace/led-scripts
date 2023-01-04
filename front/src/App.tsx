@@ -5,26 +5,29 @@ import Toolbar from '@mui/material/Toolbar';
 
 import { AppBar } from './components/AppBar';
 import { Modes } from './components/Modes';
+import { RebootSite } from './components/RebootSite';
 import { SegmentsToUse } from './components/SegmentsToUse';
 import { SpeedFactor } from './components/SpeedFactor';
 
 import './App.css';
 
 const App: React.FC = () => {
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar />
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
+	return (
+		<Box sx={{ display: 'flex' }}>
+			<AppBar />
+			<Box component="main" sx={{ p: 3 }}>
+				<Toolbar />
 
-        <SegmentsToUse />
+				<SegmentsToUse />
 
-        <SpeedFactor />
+				<SpeedFactor />
 
-        <Modes />
-      </Box>
-    </Box>
-  );
+				<Modes />
+
+				<RebootSite />
+			</Box>
+		</Box>
+	);
 };
 
 export { App };

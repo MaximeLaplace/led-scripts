@@ -4,7 +4,12 @@ import socket
 import server.src.globals as globals_
 from telegrambot.send_message import send_ip
 
-from .src.routers import segments_to_use_bp, speed_factor_bp, start_mode_bp
+from .src.routers import (
+    segments_to_use_bp,
+    speed_factor_bp,
+    start_mode_bp,
+    reboot_site_bp,
+)
 
 app = Flask(
     __name__,
@@ -18,6 +23,7 @@ cors = CORS(app)
 app.register_blueprint(start_mode_bp)
 app.register_blueprint(segments_to_use_bp)
 app.register_blueprint(speed_factor_bp)
+app.register_blueprint(reboot_site_bp)
 
 globals_.init()
 
