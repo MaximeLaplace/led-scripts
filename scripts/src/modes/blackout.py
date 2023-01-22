@@ -1,3 +1,8 @@
+import time
+
+
 def blackout(strip):
-    strip.reset()
-    strip.show()
+    while True:
+        strip.reset()
+        strip.show()
+        time.sleep(24 * 3600)
