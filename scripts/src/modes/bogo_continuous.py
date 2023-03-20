@@ -4,7 +4,7 @@ import time
 from rpi_ws281x import Color
 
 from .utils.init_time import init_time
-from .utils.rainbow import create_rainbow_array
+from .utils.rainbow import create_rgb_rainbow_array
 
 
 def gradient_coeff(k, total_k):  # triangular coefficients
@@ -54,7 +54,7 @@ def _bogo_continuous_controller(strip, wait_ms: int = 1000, nodes_number: int = 
             (random_start + i * segment_length) % length for i in range(nodes_number)
         ]
 
-        rainbow_array = create_rainbow_array(strip)
+        rainbow_array = create_rgb_rainbow_array(strip)
 
         node_colors = [rainbow_array[index] for index in indices]
         random.shuffle(node_colors)
@@ -71,9 +71,7 @@ def _bogo_continuous_controller(strip, wait_ms: int = 1000, nodes_number: int = 
             colour_gradient = compute_gradient_between(color, next_color, seg_length)
 
             for i, led in enumerate(range(led_number, next_led_number)):
-                strip.setPixelColor(led % length, colour_gradient[i])
-
-            strip.setPixelColor(led_number, color)
+                strip.setPixelColor(led % length, Color(*colour_gradient[i]))
 
         strip.show()
         time.sleep(wait_ms / 1000)
