@@ -31,50 +31,63 @@ def compute_gradient_between(color_a, color_b, number_of_steps: int):
         )
         for k in range(number_of_steps + 1, 0, -1)
     ]
-    # colour_gradient = [
-    #     (
-    #         int(gradient_coeff(k, number_of_steps) * colour_gradient[k][0]),
-    #         int(gradient_coeff(k, number_of_steps) * colour_gradient[k][1]),
-    #         int(gradient_coeff(k, number_of_steps) * colour_gradient[k][2]),
-    #     )
-    #     for k in range(len(colour_gradient))
-    # ]
     return colour_gradient
 
 
 def _bogo_continuous_controller(strip, wait_ms: int = 1000, nodes_number: int = 10):
+    strip.reset()
+
+    length = strip.numPixels()
+
+    segment_length = int(length / nodes_number)
+
+    random_start = random.randint(0, length - 1)
+    nodes_led_numbers = [
+        (random_start + i * segment_length) % length for i in range(nodes_number)
+    ]
+    rainbow_array = create_rgb_rainbow_array(strip)
+    node_colors = [rainbow_array[index] for index in nodes_led_numbers]
+    random.shuffle(node_colors)
+
     while True:
-        strip.reset()
-        length = strip.numPixels()
+        next_node_colors = node_colors.copy()
+        random.shuffle(next_node_colors)
 
-        segment_length = int(length / nodes_number)
+        nodes_gradients = []
+        for [node_color, next_node_color] in zip(node_colors, next_node_colors):
+            nodes_gradients.append(
+                compute_gradient_between(node_color, next_node_color, 20)
+            )
+        nodes_gradients = [list(x) for x in list(zip(*nodes_gradients))]
 
-        random_start = random.randint(0, length - 1)
-        indices = [
-            (random_start + i * segment_length) % length for i in range(nodes_number)
-        ]
+        for t_step in range(20):
 
-        rainbow_array = create_rgb_rainbow_array(strip)
+            current_node_colors = nodes_gradients[t_step]
 
-        node_colors = [rainbow_array[index] for index in indices]
-        random.shuffle(node_colors)
+            for index, [led_number, color] in enumerate(
+                zip(nodes_led_numbers, current_node_colors)
+            ):
+                next_color = current_node_colors[(index + 1) % len(current_node_colors)]
+                next_led_number = nodes_led_numbers[
+                    (index + 1) % len(current_node_colors)
+                ]
 
-        for index, [led_number, color] in enumerate(zip(indices, node_colors)):
-            next_color = node_colors[(index + 1) % len(node_colors)]
-            next_led_number = indices[(index + 1) % len(node_colors)]
+                if next_led_number < led_number:
+                    next_led_number += length
 
-            if next_led_number < led_number:
-                next_led_number += length
+                seg_length = next_led_number - led_number
 
-            seg_length = next_led_number - led_number
+                colour_gradient = compute_gradient_between(
+                    color, next_color, seg_length
+                )
 
-            colour_gradient = compute_gradient_between(color, next_color, seg_length)
+                for i, led in enumerate(range(led_number, next_led_number)):
+                    strip.setPixelColor(led % length, Color(*colour_gradient[i]))
 
-            for i, led in enumerate(range(led_number, next_led_number)):
-                strip.setPixelColor(led % length, Color(*colour_gradient[i]))
+            strip.show()
+            time.sleep(wait_ms / 1000)
 
-        strip.show()
-        time.sleep(wait_ms / 1000)
+        node_colors = next_node_colors.copy()
 
 
 def bogo_continuous(
