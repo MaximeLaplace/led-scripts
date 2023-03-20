@@ -1,5 +1,6 @@
 from .blackout import blackout
 from .bogo import bogo
+from .bogo_continuous import bogo_continuous
 from .bouncing_pulse import bouncing_pulse
 from .bubble_sort import bubble_sort
 from .cellular_automaton import cellular_automaton
