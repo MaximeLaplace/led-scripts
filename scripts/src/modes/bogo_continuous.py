@@ -3,12 +3,7 @@ import time
 
 from rpi_ws281x import Color
 
-from .utils.init_time import init_time
 from .utils.rainbow import create_rgb_rainbow_array
-
-
-def gradient_coeff(k, total_k):  # triangular coefficients
-    return 1 - abs(2 * (k / total_k) - 1)
 
 
 def compute_gradient_between(color_a, color_b, number_of_steps: int):
@@ -92,15 +87,10 @@ def _bogo_continuous_controller(strip, wait_ms: int = 1000, nodes_number: int = 
 
 def bogo_continuous(
     strip,
-    nodes_number: int = 10,
-    wait_ms: int = 100,
+    nodes_number: int = 13,
+    wait_ms: int = 30,
 ):
-    """crée un arc-en-ciel et le mélange en bogo sort
-
-    Args:
-        wait_ms (int): temps d'attente entre chaque mélange en ms
-        durations_s (int): temps total d'éxécution
-    """
+    """random * random"""
     _bogo_continuous_controller(
         strip,
         wait_ms=wait_ms,
