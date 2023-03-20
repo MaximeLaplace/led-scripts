@@ -12,7 +12,7 @@ from .rainbow import rainbow
 from .rainbowDemo import rainbowDemo
 from .segment_strobo import segment_strobo
 from .strobo import strobo
-from .theater_chase import theater_chase
+from .theater_chase import theater_chase_blue
 from .theater_chase_rainbow import theater_chase_rainbow
 
 
@@ -35,12 +35,12 @@ def demo(strip):
             pass
 
         for _ in range(3):
-            theater_chase(strip=strip, color=(255, 0, 0), duration_s=1)
-            theater_chase(strip=strip, color=(125, 125, 0), duration_s=1)
-            theater_chase(strip=strip, color=(0, 255, 0), duration_s=1)
-            theater_chase(strip=strip, color=(0, 125, 125), duration_s=1)
-            theater_chase(strip=strip, color=(0, 0, 255), duration_s=1)
-            theater_chase(strip=strip, color=(125, 0, 125), duration_s=1)
+            theater_chase_blue(strip=strip, color=(255, 0, 0), duration_s=1)
+            theater_chase_blue(strip=strip, color=(125, 125, 0), duration_s=1)
+            theater_chase_blue(strip=strip, color=(0, 255, 0), duration_s=1)
+            theater_chase_blue(strip=strip, color=(0, 125, 125), duration_s=1)
+            theater_chase_blue(strip=strip, color=(0, 0, 255), duration_s=1)
+            theater_chase_blue(strip=strip, color=(125, 0, 125), duration_s=1)
 
         strobo(strip=strip, wait_ms=120, duration_s=10)
 

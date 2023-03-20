@@ -29,9 +29,59 @@ def _theater_chase_controller(
                         strip.setPixelColor(i + q, 0)
 
 
-def theater_chase(
+def theater_chase_red(
+    strip,
+    color: tuple[int, int, int] = (255, 0, 0),
+    wait_ms: int = 50,
+    iterations: int = 10,
+    duration_s: int = 10,
+    infinite: bool = True,
+):
+    """Des petites lights qui tournent en étant d'une couleur au choix
+
+    Args:
+        color (tuple[int, int, int]): la couleur des LED
+        wait_ms (int): Le temps d'attente entre chaque step en ms (petit = rapide)
+        iterations (int): Le nombre de tours effectués
+    """
+    _theater_chase_controller(
+        strip,
+        Color(*color),
+        wait_ms=wait_ms,
+        iterations=iterations,
+        duration_s=duration_s,
+        infinite=infinite,
+    )
+
+
+def theater_chase_blue(
     strip,
     color: tuple[int, int, int] = (0, 255, 0),
+    wait_ms: int = 50,
+    iterations: int = 10,
+    duration_s: int = 10,
+    infinite: bool = True,
+):
+    """Des petites lights qui tournent en étant d'une couleur au choix
+
+    Args:
+        color (tuple[int, int, int]): la couleur des LED
+        wait_ms (int): Le temps d'attente entre chaque step en ms (petit = rapide)
+        iterations (int): Le nombre de tours effectués
+    """
+    _theater_chase_controller(
+        strip,
+        Color(*color),
+        wait_ms=wait_ms,
+        iterations=iterations,
+        duration_s=duration_s,
+        infinite=infinite,
+    )
+
+
+def theater_chase_green(
+    strip,
+    color: tuple[int, int, int] = (0, 0, 255),
     wait_ms: int = 50,
     iterations: int = 10,
     duration_s: int = 10,
