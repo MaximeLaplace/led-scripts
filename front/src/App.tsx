@@ -1,33 +1,46 @@
-import React from 'react';
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+import { Toolbar } from "@mui/material";
+import Box from "@mui/material/Box";
 
-import { AppBar } from './components/AppBar';
-import { Modes } from './components/Modes';
-import { RebootSite } from './components/RebootSite';
-import { SegmentsToUse } from './components/SegmentsToUse';
-import { SpeedFactor } from './components/SpeedFactor';
+import { AppBar } from "./components/AppBar";
+import { Dashboard } from "./pages/Dashboard";
+import { IndividualMode } from "./pages/IndividualMode";
 
-import './App.css';
+import "./App.css";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Dashboard />
+  },
+  {
+    path: "/live",
+    element: <IndividualMode />
+  },
+  {
+    path: "*",
+    element: (
+      <div>
+        404
+        <br /> Page does not exist
+      </div>
+    )
+  }
+]);
 
 const App: React.FC = () => {
-	return (
-		<Box sx={{ display: 'flex' }}>
-			<AppBar />
-			<Box component="main" sx={{ p: 3 }}>
-				<Toolbar />
+  return (
+    <Box sx={{ display: "flex" }}>
+      <AppBar />
+      <Box component="main" sx={{ p: 3 }}>
+        <Toolbar />
 
-				<SegmentsToUse />
-
-				<SpeedFactor />
-
-				<Modes />
-
-				<RebootSite />
-			</Box>
-		</Box>
-	);
+        <RouterProvider router={router} />
+      </Box>
+    </Box>
+  );
 };
 
 export { App };

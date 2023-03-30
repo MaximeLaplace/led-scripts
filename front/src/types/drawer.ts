@@ -1,7 +1,9 @@
-import React from 'react';
+import React from "react";
 
 export type NavItem = {
+  href?: string;
   icon: React.ReactElement;
   label: string;
-  position: 'left' | 'right';
+  onClick?: () => void;
+  position: "left" | "right";
 };

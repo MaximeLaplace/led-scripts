@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { Box } from '@mui/material';
+import { Box } from "@mui/material";
 
-import { NavItem } from '../../types/drawer';
+import { NavItem } from "../../types/drawer";
 
-import { IconButton } from './IconButton';
+import { IconButton } from "./IconButton";
 
 type Props = {
   displayLabels?: boolean;
   navItems: Record<string, NavItem[]>;
-  position: 'left' | 'right';
+  position: "left" | "right";
 };
 
 const IconBlock = ({ navItems, position, displayLabels = true }: Props) => {
@@ -21,8 +21,10 @@ const IconBlock = ({ navItems, position, displayLabels = true }: Props) => {
           .map((navItem) => (
             <IconButton
               key={navItem.label}
-              label={displayLabels ? navItem.label : ''}
+              label={displayLabels ? navItem.label : ""}
               icon={navItem.icon}
+              onClick={navItem.onClick}
+              href={navItem.href}
             />
           ))}
       </Box>
@@ -32,8 +34,10 @@ const IconBlock = ({ navItems, position, displayLabels = true }: Props) => {
           .map((navItem) => (
             <IconButton
               key={navItem.label}
-              label={displayLabels ? navItem.label : ''}
+              label={displayLabels ? navItem.label : ""}
               icon={navItem.icon}
+              onClick={navItem.onClick}
+              href={navItem.href}
             />
           ))}
       </Box>

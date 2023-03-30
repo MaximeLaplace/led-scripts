@@ -1,32 +1,33 @@
-import React from 'react';
+import React from "react";
 
-import { Box, Button } from '@mui/material';
+import { Box, Button } from "@mui/material";
 
-import { useBreakpoints } from '../../hooks/useBreakpoints';
+import { useBreakpoints } from "../../hooks/useBreakpoints";
 
 const makeStyles = (isSmOrBigger: boolean) => ({
-  alignItems: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  marginTop: '2px',
-  padding: '5px',
-  width: isSmOrBigger ? '100px' : '60px'
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  marginTop: "2px",
+  padding: "5px",
+  width: isSmOrBigger ? "100px" : "60px"
 });
 
 type Props = {
+  href?: string;
   icon: React.ReactElement;
   label: string;
   onClick?: () => void;
 };
 
-export const IconButton = ({ icon, label, onClick }: Props) => {
+export const IconButton = ({ icon, label, onClick, href }: Props) => {
   const { isSmOrBigger } = useBreakpoints();
 
   const styles = makeStyles(isSmOrBigger);
 
   return (
-    <Button sx={{ color: '#fff' }} onClick={onClick}>
+    <Button sx={{ color: "#fff" }} onClick={onClick} href={href}>
       <Box sx={styles}>
         {icon}
         {label}
