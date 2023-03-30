@@ -21,10 +21,46 @@ def _color_wipe_controller(
             time.sleep(wait_ms / 1000)
 
 
-def color_wipe(
+def color_wipe_red(
     strip,
     color: tuple[int, int, int] = (255, 0, 0),
-    wait_ms: int = 50,
+    wait_ms: int = 6,
+    duration_s: int = 10,
+    infinite: bool = True,
+):
+    """Allume la bande lumineuse progressivement
+
+    Args:
+        color (tuple[int, int, int]): La couleur utilisée.
+        wait_ms (int): le temps d'attente entre les allumages de 2 LED consécutives.
+    """
+    _color_wipe_controller(
+        strip, Color(*color), wait_ms=wait_ms, duration_s=duration_s, infinite=infinite
+    )
+
+
+def color_wipe_blue(
+    strip,
+    color: tuple[int, int, int] = (0, 255, 0),
+    wait_ms: int = 6,
+    duration_s: int = 10,
+    infinite: bool = True,
+):
+    """Allume la bande lumineuse progressivement
+
+    Args:
+        color (tuple[int, int, int]): La couleur utilisée.
+        wait_ms (int): le temps d'attente entre les allumages de 2 LED consécutives.
+    """
+    _color_wipe_controller(
+        strip, Color(*color), wait_ms=wait_ms, duration_s=duration_s, infinite=infinite
+    )
+
+
+def color_wipe_green(
+    strip,
+    color: tuple[int, int, int] = (0, 0, 255),
+    wait_ms: int = 6,
     duration_s: int = 10,
     infinite: bool = True,
 ):

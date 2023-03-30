@@ -29,7 +29,7 @@ def compute_gradient_between(color_a, color_b, number_of_steps: int):
     return colour_gradient
 
 
-def _bogo_continuous_controller(strip, wait_ms: int = 1000, nodes_number: int = 10):
+def _bogo_continuous_controller(strip, wait_ms: int = 1, nodes_number: int = 10):
     strip.reset()
 
     length = strip.numPixels()
@@ -88,7 +88,7 @@ def _bogo_continuous_controller(strip, wait_ms: int = 1000, nodes_number: int = 
 def bogo_continuous(
     strip,
     nodes_number: int = 13,
-    wait_ms: int = 30,
+    wait_ms: int = 1,
 ):
     """random * random"""
     _bogo_continuous_controller(
