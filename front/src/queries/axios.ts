@@ -12,7 +12,11 @@ export type RequestGetOptions = RequestOptions & {
   method: "GET";
 };
 
-const createRequestBuilder =
+export type RequestPostOptions = RequestOptions & {
+  method: "POST";
+};
+
+const createRequestRunner =
   <T>(options: RequestOptions) =>
   async (): Promise<T> => {
     const { data } = await axios<T>(options);
@@ -20,33 +24,38 @@ const createRequestBuilder =
     return data;
   };
 
-export const generateGetHook = <T, D>(
+export const generateGetHook = <InboundDataType>(
   options: RequestGetOptions,
-  defaultTo: D
-): (() => T | D) => {
-  const getModes = createRequestBuilder<T>(options);
+  defaultTo: InboundDataType
+): (() => [InboundDataType, React.Dispatch<InboundDataType>]) => {
+  const request = createRequestRunner<InboundDataType>(options);
 
   return () => {
-    const [modes, setModes] = useState<T | D>(defaultTo);
+    const [data, setData] = useState<InboundDataType>(defaultTo);
 
     useEffect(() => {
       const process = async () => {
-        const modes = await getModes();
+        const axiosData = await request();
 
-        setModes(modes);
+        setData(axiosData);
       };
 
       process();
     }, []);
 
-    return modes;
+    return [data, setData];
   };
 };
 
-const a = <T>(b: T): T => {
-  console.log("fzeiofjeozi");
+export const generatePostHook =
+  <OutboundDataType>(
+    options:
+      | RequestPostOptions
+      | ((data: OutboundDataType) => RequestPostOptions)
+  ) =>
+  async (data: OutboundDataType) => {
+    const parsedOptions =
+      typeof options === "function" ? options(data) : options;
 
-  return "rjfioofjz";
-};
-
-const fezfz = a(["hello", { name: "he" }]);
+    return createRequestRunner(parsedOptions)();
+  };

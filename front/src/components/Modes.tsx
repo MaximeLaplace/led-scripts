@@ -1,33 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from "react";
+import { startMode, useModes } from "src/queries/requests";
 
-import { Button, Grid } from '@mui/material';
+import { Button, Grid } from "@mui/material";
 
-import { TitleDivider } from './TitleDivider';
+import { TitleDivider } from "./TitleDivider";
 
 export const Modes = () => {
-  const [modes, setModes] = useState<string[]>([]);
-
-  useEffect(() => {
-    const get = async () => {
-      const { data } = await axios({
-        url: '/start_mode',
-        method: 'GET'
-      });
-      setModes(data);
-    };
-    get();
-  }, []);
-
-  const startMode = (mode: string) => () => {
-    axios({
-      url: '/start_mode',
-      method: 'POST',
-      data: {
-        mode
-      }
-    });
-  };
+  const [modes] = useModes();
 
   return (
     <>
@@ -36,7 +15,11 @@ export const Modes = () => {
         {modes.length ? (
           modes.map((mode) => (
             <Grid key={mode} item xs={8} sm={3}>
-              <Button variant="contained" fullWidth onClick={startMode(mode)}>
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={() => startMode(mode)}
+              >
                 {mode}
               </Button>
             </Grid>

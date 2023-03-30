@@ -1,14 +1,16 @@
+import socket
+
 from flask import Flask, render_template
 from flask_cors import CORS
-import socket
+
 import server.src.globals as globals_
 from telegrambot.send_message import send_ip
 
 from .src.routers import (
+    reboot_site_bp,
     segments_to_use_bp,
     speed_factor_bp,
     start_mode_bp,
-    reboot_site_bp,
 )
 
 app = Flask(
