@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Box, Toolbar } from "@mui/material";
-
-import { AppBar } from "../components/AppBar";
-import { Modes } from "../components/Modes";
-import { RebootSite } from "../components/RebootSite";
-import { SegmentsToUse } from "../components/SegmentsToUse";
-import { SpeedFactor } from "../components/SpeedFactor";
+import { ModeParameters } from "../components/ModeParameters";
+import { ModeSelector } from "../components/ModeSelector";
 
 const IndividualMode = () => {
-  return <div>Individual mode</div>;
+  const [modeToEdit, setModeToEdit] = useState<string | undefined>(undefined);
+
+  return (
+    <>
+      <ModeSelector modeToEdit={modeToEdit} setModeToEdit={setModeToEdit} />
+      <ModeParameters mode={modeToEdit} />
+    </>
+  );
 };
 
 export { IndividualMode };

@@ -36,9 +36,9 @@ const App: React.FC = () => {
     <RouterProvider>
       {(route) => (
         <>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", width: "100vw" }}>
             <AppBar />
-            <Box component="main" sx={{ p: 3 }}>
+            <Box component="main" sx={{ p: 3, width: "100%" }}>
               <Toolbar />
 
               <Router route={route} />
