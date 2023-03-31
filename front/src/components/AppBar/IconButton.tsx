@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Route, RouteContext } from "src/Router";
 
 import { Box, Button } from "@mui/material";
 
@@ -15,19 +16,25 @@ const makeStyles = (isSmOrBigger: boolean) => ({
 });
 
 type Props = {
-  href?: string;
+  href?: Route;
   icon: React.ReactElement;
   label: string;
-  onClick?: () => void;
 };
 
-export const IconButton = ({ icon, label, onClick, href }: Props) => {
+export const IconButton = ({ icon, label, href }: Props) => {
   const { isSmOrBigger } = useBreakpoints();
+
+  const setRoute = useContext(RouteContext);
 
   const styles = makeStyles(isSmOrBigger);
 
   return (
-    <Button sx={{ color: "#fff" }} onClick={onClick} href={href}>
+    <Button
+      sx={{ color: "#fff" }}
+      onClick={() => {
+        setRoute(href || "/");
+      }}
+    >
       <Box sx={styles}>
         {icon}
         {label}

@@ -23,7 +23,6 @@ const IconBlock = ({ navItems, position, displayLabels = true }: Props) => {
               key={navItem.label}
               label={displayLabels ? navItem.label : ""}
               icon={navItem.icon}
-              onClick={navItem.onClick}
               href={navItem.href}
             />
           ))}
@@ -36,7 +35,6 @@ const IconBlock = ({ navItems, position, displayLabels = true }: Props) => {
               key={navItem.label}
               label={displayLabels ? navItem.label : ""}
               icon={navItem.icon}
-              onClick={navItem.onClick}
               href={navItem.href}
             />
           ))}
