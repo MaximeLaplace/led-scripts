@@ -9,7 +9,7 @@ const IndividualMode = () => {
   return (
     <>
       <ModeSelector modeToEdit={modeToEdit} setModeToEdit={setModeToEdit} />
-      <ModeParameters mode={modeToEdit} />
+      {modeToEdit && <ModeParameters mode={modeToEdit} />}
     </>
   );
 };

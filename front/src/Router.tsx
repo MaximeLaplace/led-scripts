@@ -1,7 +1,7 @@
 import React from "react";
 import { createContext, useState } from "react";
 
-export const ROUTES = ["/", "/live"] as const;
+export const ROUTES = ["/", "/live", "/favorites"] as const;
 
 export type Route = typeof ROUTES[number];
 

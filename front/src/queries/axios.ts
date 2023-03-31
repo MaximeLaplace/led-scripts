@@ -47,6 +47,36 @@ export const generateGetHook = <InboundDataType>(
   };
 };
 
+export const generateGetHookWithParams = <InboundDataType, Params>(
+  options: (params: Params) => RequestGetOptions,
+  defaultTo: InboundDataType
+): ((
+  params: Params
+) => [
+  InboundDataType,
+  React.Dispatch<React.SetStateAction<InboundDataType>>
+]) => {
+  return (params: Params) => {
+    const formattedOptions = options(params);
+
+    const request = createRequestRunner<InboundDataType>(formattedOptions);
+
+    const [data, setData] = useState<InboundDataType>(defaultTo);
+
+    useEffect(() => {
+      const process = async () => {
+        const axiosData = await request();
+
+        setData(axiosData);
+      };
+
+      process();
+    }, [params]);
+
+    return [data, setData];
+  };
+};
+
 export const generatePostHook =
   <OutboundDataType>(
     options:

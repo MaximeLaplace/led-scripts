@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 
 import { AppBar } from "./components/AppBar";
 import { Dashboard } from "./pages/Dashboard";
+import { Favorites } from "./pages/Favorites";
 import { IndividualMode } from "./pages/IndividualMode";
 import { Route, RouterProvider, ROUTES } from "./Router";
 
@@ -12,7 +13,8 @@ import "./App.css";
 
 const router: Record<Route, React.ReactElement> = {
   "/": <Dashboard />,
-  "/live": <IndividualMode />
+  "/live": <IndividualMode />,
+  "/favorites": <Favorites />
 };
 
 const Router = ({ route }: { route: Route }) => {

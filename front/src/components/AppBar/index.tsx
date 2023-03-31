@@ -2,8 +2,9 @@ import React from "react";
 
 import { NavItem } from "@ledapp/types/drawer";
 import AppsIcon from "@mui/icons-material/Apps";
-import FlashOnIcon from "@mui/icons-material/FlashOn";
+// import FlashOnIcon from "@mui/icons-material/FlashOn";
 import LogoutIcon from "@mui/icons-material/Logout";
+import StarIcon from "@mui/icons-material/Star";
 import TuneIcon from "@mui/icons-material/Tune";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -27,9 +28,10 @@ const NAV_ITEMS: Record<string, NavItem[]> = {
       href: "/live"
     },
     {
-      icon: <FlashOnIcon />,
-      label: "STROBO",
-      position: "left"
+      icon: <StarIcon />,
+      label: "FAVS",
+      position: "left",
+      href: "/favorites"
     }
   ],
   right: [

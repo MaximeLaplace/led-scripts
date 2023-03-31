@@ -1,5 +1,6 @@
 import {
   generateGetHook,
+  generateGetHookWithParams,
   generatePostHook,
   RequestGetOptions,
   RequestPostOptions
@@ -10,6 +11,10 @@ const GET_REQUEST_PARAMS: Record<string, RequestGetOptions> = {
     url: "/start_mode",
     method: "GET"
   },
+  favoriteModes: {
+    url: "/favorites",
+    method: "GET"
+  },
   segmentsToUse: {
     url: "/segments_to_use",
     method: "GET"
@@ -18,6 +23,20 @@ const GET_REQUEST_PARAMS: Record<string, RequestGetOptions> = {
     url: "/speed_factor",
     method: "GET"
   }
+};
+
+const GET_REQUESTS_WITH_PARAMS: Record<
+  string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (params: any) => RequestGetOptions
+> = {
+  modeParameters: (mode: string) => ({
+    url: "/mode-parameters",
+    method: "GET",
+    params: {
+      mode
+    }
+  })
 };
 
 const POST_REQUEST_PARAMS: Record<
@@ -43,14 +62,31 @@ const POST_REQUEST_PARAMS: Record<
 };
 
 export const useModes = generateGetHook<string[]>(GET_REQUEST_PARAMS.modes, []);
+
+export const useFavoriteModes = generateGetHook<string[]>(
+  GET_REQUEST_PARAMS.favoriteModes,
+  []
+);
+
 export const useSegmentsToUse = generateGetHook<"top" | "all" | null>(
   GET_REQUEST_PARAMS.segmentsToUse,
   null
 );
+
 export const useSpeedFactor = generateGetHook<string | null>(
   GET_REQUEST_PARAMS.speedFactor,
   null
 );
+
+type ModeParameters = Record<
+  string,
+  string | number | boolean | [number, number, number]
+>;
+
+export const useModeParameters = generateGetHookWithParams<
+  ModeParameters,
+  string
+>(GET_REQUESTS_WITH_PARAMS.modeParameters, {});
 
 export const pushSegmentsToUse = generatePostHook<"top" | "all">(
   POST_REQUEST_PARAMS.segmentsToUse

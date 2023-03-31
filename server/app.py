@@ -7,6 +7,7 @@ import server.src.globals as globals_
 from telegrambot.send_message import send_ip
 
 from .src.routers import (
+    mode_bp,
     reboot_site_bp,
     segments_to_use_bp,
     speed_factor_bp,
@@ -26,6 +27,7 @@ app.register_blueprint(start_mode_bp)
 app.register_blueprint(segments_to_use_bp)
 app.register_blueprint(speed_factor_bp)
 app.register_blueprint(reboot_site_bp)
+app.register_blueprint(mode_bp)
 
 globals_.init()
 

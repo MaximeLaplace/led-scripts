@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 
 from server.src.controllers.start_mode_controller import (
+    get_favorite_modes,
     get_modes,
     start_mode_controller,
 )
@@ -11,6 +12,11 @@ start_mode_bp = Blueprint("start_mode", __name__)
 @start_mode_bp.route("/start_mode", methods=["GET"])
 def start_mode():
     return get_modes()
+
+
+@start_mode_bp.route("/favorites", methods=["GET"])
+def get_favorites():
+    return get_favorite_modes()
 
 
 @start_mode_bp.route("/start_mode", methods=["POST"])

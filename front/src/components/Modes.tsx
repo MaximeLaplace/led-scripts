@@ -1,17 +1,21 @@
 import React from "react";
-import { startMode, useModes } from "src/queries/requests";
+import { startMode, useFavoriteModes, useModes } from "src/queries/requests";
 
 import { Button, Grid } from "@mui/material";
 
 import { TitleDivider } from "./TitleDivider";
 
-export const Modes = () => {
-  const [modes] = useModes();
+type Props = {
+  useFavorites?: boolean;
+};
+
+export const Modes = ({ useFavorites }: Props) => {
+  const [modes] = useFavorites ? useFavoriteModes() : useModes();
 
   return (
     <>
       <TitleDivider title="Modes" />
-      <Grid container spacing={4} justifyContent="center">
+      <Grid container spacing={2} justifyContent="center">
         {modes.length ? (
           modes.map((mode) => (
             <Grid key={mode} item xs={8} sm={3}>

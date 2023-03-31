@@ -15,5 +15,4 @@ def speed_factor():
 
 @speed_factor_bp.route("/speed_factor/<speed_factor>", methods=["POST"])
 def update_speed_factor_router(speed_factor):
-    print(speed_factor)
     return update_speed_factor(speed_factor)

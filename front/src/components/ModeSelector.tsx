@@ -36,8 +36,8 @@ const mockModes = () => {
 };
 
 export const ModeSelector = ({ modeToEdit, setModeToEdit }: Props) => {
-  //   const [modes] = useModes();
-  const modes = mockModes();
+  const [modes] = useModes();
+  // const modes = mockModes();
 
   useEffect(() => {
     setModeToEdit(modes[0]);
