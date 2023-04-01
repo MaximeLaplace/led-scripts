@@ -14,7 +14,7 @@ def gradient_blink(
     strip,
     colour_begin: tuple[int, int, int] = (255, 0, 0),
     colour_end: tuple[int, int, int] = (0, 255, 0),
-    wait_ms: int = 10,
+    wait_ms: int = 20,
     duration_s: int = 10,
     n_steps_gradiant: int = 30,
     random_speeds: bool = False,
