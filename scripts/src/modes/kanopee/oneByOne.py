@@ -8,12 +8,12 @@ from ..utils.kanopeeUtils import map_letters
 
 
 def one_by_one(
-    strip, color=(255, 255, 255), wait_ms: int = 100, duration_s: int = 10, infinite: bool = True
+    strip, color=(255, 255, 255), wait_ms: int = 500, duration_s: int = 10, infinite: bool = True
 ):
     time_left = init_time(duration_s)
 
     colors = [
-        color,
+        Color(color),
         Color(0, 0, 0),
         Color(0, 0, 0),
         Color(0, 0, 0),
