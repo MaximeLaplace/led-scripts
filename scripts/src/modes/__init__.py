@@ -17,3 +17,4 @@ from .slider_strobo import slider_strobo
 from .strobo import strobo
 from .theater_chase import theater_chase_blue, theater_chase_green, theater_chase_red
 from .theater_chase_rainbow import theater_chase_rainbow as theater_chase__rainbow
+from .kanopee.oneByOne import one_by_one
