@@ -2,6 +2,7 @@ import inquirer
 
 from config import (
     BREAKPOINTS,
+    KANOPEE_BREAKPOINTS,
     LED_BRIGHTNESS,
     LED_CHANNEL,
     LED_COUNT,
@@ -141,7 +142,6 @@ def _generate_strip(segments: tuple[int] = (0, 1, 2, 3, 4, 5, 6, 7)):
     return strip
 
 def _generate_kanopee_strip():
-    KANOPEE_BREAKPOINTS = [0, 13, 15, 16, 19, 20, 25, 27, 28, 30, 36, 38, 44, 49, 53, 57, 63, 66, 72]
     segments_lettres = (1, 3, 5, 7, 9, 11, 13, 15, 17)
 
     strip = PixelStripSelected(
@@ -172,7 +172,7 @@ def create_strip(choice: str = None):
             inquirer.List(
                 "strip_type",
                 message="Quelles LED voulez vous utiliser ?",
-                choices=[ALL_LED, UPPER_LED, _CUSTOM_LED, KANOPEE],
+                choices=[ALL_LED, UPPER_LED, KANOPEE, _CUSTOM_LED],
                 carousel=True,
             )
         ]
