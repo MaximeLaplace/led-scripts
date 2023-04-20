@@ -11,3 +11,11 @@ def map_letters(colors):
         final_array.extend([new_colors[i]]*KANOPEE_LETTERS_SIZES[i])
     
     return final_array
+
+def invert(array, colorA, colorB):
+    for i in range(len(array)):
+        if array[i] == colorA:
+            array[i] = colorB
+        elif array[i] == colorB:
+            array[i] = colorA
+    return array
