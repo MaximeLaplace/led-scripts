@@ -1,4 +1,4 @@
-KANOPEE_LETTERS_SIZES = [4, 6, 6, 6, 4, 6, 6]
+KANOPEE_LETTERS_SIZES = [5, 6, 6, 6, 4, 6, 6]
 
 def map_letters(colors):
     if len(colors) < 7:
