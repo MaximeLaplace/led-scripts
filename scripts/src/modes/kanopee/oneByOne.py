@@ -8,7 +8,7 @@ from ..utils.kanopeeUtils import map_letters
 
 
 def one_by_one(
-    strip, color=(255, 255, 255), wait_ms: int = 500, duration_s: int = 10, infinite: bool = True
+    strip, color=(255, 255, 255), wait_ms: int = 469, duration_s: int = 10, infinite: bool = True
 ):
     time_left = init_time(duration_s)
 
@@ -23,7 +23,7 @@ def one_by_one(
     ]
 
     while time_left() > 0 or infinite:
-        strip.setArrayColor(map_letters(colors))
+        strip.setArrayColor(list(reversed(map_letters(colors))))
         strip.show()
         time.sleep(wait_ms / 1000)
         shift(colors)
