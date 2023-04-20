@@ -56,25 +56,18 @@ class PixelSegment:
 
         self.setArrayColor(self._colors)
 
-
 class PixelStripWithSegments(PixelStrip):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, breakpoints=BREAKPOINTS,*args, **kwargs):
         super().__init__(*args, *kwargs)
 
-        self.segments = [
-            PixelSegment(super(), BREAKPOINTS[0], BREAKPOINTS[1]),
-            PixelSegment(super(), BREAKPOINTS[1], BREAKPOINTS[2]),
-            PixelSegment(super(), BREAKPOINTS[2], BREAKPOINTS[3]),
-            PixelSegment(super(), BREAKPOINTS[3], BREAKPOINTS[4]),
-            PixelSegment(super(), BREAKPOINTS[4], BREAKPOINTS[5]),
-            PixelSegment(super(), BREAKPOINTS[5], BREAKPOINTS[6]),
-            PixelSegment(super(), BREAKPOINTS[6], BREAKPOINTS[7]),
-            PixelSegment(super(), BREAKPOINTS[7], BREAKPOINTS[8]),
-        ]
+        self.breakpoints = breakpoints
+        self.segments = []
+        for i in range(len(breakpoints)-1):
+            self.segments.append(PixelSegment(super(), breakpoints[i], breakpoints[i+1]))
 
     def get_segment_from_index(self, index: int):
         segment_index = -1
-        while index >= BREAKPOINTS[segment_index + 1]:
+        while index >= self.breakpoints[segment_index + 1]:
             segment_index += 1
         return segment_index
 
@@ -147,10 +140,28 @@ def _generate_strip(segments: tuple[int] = (0, 1, 2, 3, 4, 5, 6, 7)):
     strip.begin()
     return strip
 
+def _generate_kanopee_strip():
+    KANOPEE_BREAKPOINTS = [0, 13, 15, 16, 19, 20, 25, 27, 28, 30, 36, 38, 44, 49, 53, 57, 63, 66, 72]
+    segments_lettres = (1, 3, 5, 7, 9, 11, 13, 15, 17)
+
+    strip = PixelStripSelected(
+        segments_lettres,
+        KANOPEE_BREAKPOINTS,
+        LED_COUNT,
+        LED_PIN,
+        LED_FREQ_HZ,
+        LED_DMA,
+        LED_INVERT,
+        LED_BRIGHTNESS,
+        LED_CHANNEL
+    )
+    strip.begin()
+    return strip
 
 UPPER_LED = "Uniquement le carré de LED du haut"
 ALL_LED = "Toutes les LED"
 _CUSTOM_LED = "Custom"
+KANOPEE = "Kanopée"
 
 
 def create_strip(choice: str = None):
@@ -161,7 +172,7 @@ def create_strip(choice: str = None):
             inquirer.List(
                 "strip_type",
                 message="Quelles LED voulez vous utiliser ?",
-                choices=[ALL_LED, UPPER_LED, _CUSTOM_LED],
+                choices=[ALL_LED, UPPER_LED, _CUSTOM_LED, KANOPEE],
                 carousel=True,
             )
         ]
@@ -174,6 +185,9 @@ def create_strip(choice: str = None):
 
     if led_to_address == UPPER_LED:
         return _generate_strip((1, 2, 5, 6))
+    
+    if led_to_address == KANOPEE:
+        return _generate_kanopee_strip()
 
     if led_to_address == _CUSTOM_LED:
         segments = inquirer.prompt(
