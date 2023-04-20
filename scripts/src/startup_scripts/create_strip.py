@@ -3,6 +3,8 @@ import inquirer
 from config import (
     BREAKPOINTS,
     KANOPEE_BREAKPOINTS,
+    CADRE_BREAKPOINTS,
+    TAILLE_BUFFER_KANOPEE,
     LED_BRIGHTNESS,
     LED_CHANNEL,
     LED_COUNT,
@@ -158,10 +160,31 @@ def _generate_kanopee_strip():
     strip.begin()
     return strip
 
+def _generate_kanopee_cadre_strip():
+    new_breakpoints = CADRE_BREAKPOINTS
+    new_breakpoints.extend([p + CADRE_BREAKPOINTS[-1] - (13 - TAILLE_BUFFER_KANOPEE) for p in KANOPEE_BREAKPOINTS[1:]])
+
+    segments_interessants = (0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
+
+    strip = PixelStripSelected(
+        segments_interessants,
+        new_breakpoints,
+        LED_COUNT,
+        LED_PIN,
+        LED_FREQ_HZ,
+        LED_DMA,
+        LED_INVERT,
+        LED_BRIGHTNESS,
+        LED_CHANNEL
+    )
+    strip.begin()
+    return strip
+
 UPPER_LED = "Uniquement le carré de LED du haut"
 ALL_LED = "Toutes les LED"
 _CUSTOM_LED = "Custom"
 KANOPEE = "Kanopée"
+KANOPEE_CADRE = "Kanopée avec cadre"
 
 
 def create_strip(choice: str = None):
@@ -172,7 +195,7 @@ def create_strip(choice: str = None):
             inquirer.List(
                 "strip_type",
                 message="Quelles LED voulez vous utiliser ?",
-                choices=[ALL_LED, UPPER_LED, KANOPEE, _CUSTOM_LED],
+                choices=[ALL_LED, UPPER_LED, KANOPEE, KANOPEE_CADRE, _CUSTOM_LED],
                 carousel=True,
             )
         ]
@@ -188,6 +211,9 @@ def create_strip(choice: str = None):
     
     if led_to_address == KANOPEE:
         return _generate_kanopee_strip()
+    
+    if led_to_address == KANOPEE_CADRE:
+        return _generate_kanopee_cadre_strip()
 
     if led_to_address == _CUSTOM_LED:
         segments = inquirer.prompt(
