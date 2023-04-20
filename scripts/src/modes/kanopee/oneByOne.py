@@ -13,7 +13,7 @@ def one_by_one(
     time_left = init_time(duration_s)
 
     colors = [
-        Color(color),
+        Color(*color),
         Color(0, 0, 0),
         Color(0, 0, 0),
         Color(0, 0, 0),
