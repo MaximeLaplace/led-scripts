@@ -26,6 +26,6 @@ def invert(array, colorA, colorB):
     return array
 
 def padForKanopeeCadre(list):
-    new_list = [Color(0, 0, 0)]*(CADRE_SIZE + (BUFFER_SIZE - 13))
+    new_list = [Color(0, 0, 0)]*CADRE_SIZE
     new_list.extend(list)
     return new_list
