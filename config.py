@@ -8,7 +8,7 @@ LED_INVERT = False  # True to invert the signal (when using NPN transistor level
 LED_CHANNEL = 0  # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 BREAKPOINTS = [0, 13, 50, 72, 75, 78, 115, 136, 149]
-KANOPEE_BREAKPOINTS = [0, 13, 15, 16, 19, 20, 25, 29, 30, 32, 38, 40, 46, 51, 56, 60, 66, 68, 74]
+KANOPEE_BREAKPOINTS = [0, 13, 15, 16, 19, 20, 25, 27, 28, 30, 36, 40, 46, 51, 56, 60, 66, 68, 74]
 
 CADRE_BREAKPOINTS = [0, 15, 38, 52]
 TAILLE_BUFFER_KANOPEE = 8
