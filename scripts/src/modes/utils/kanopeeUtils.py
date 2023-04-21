@@ -1,4 +1,7 @@
+from rpi_ws281x import Color
+
 KANOPEE_LETTERS_SIZES = [5, 6, 6, 6, 5, 6, 6]
+CADRE_SIZE = 52
 
 def map_letters(colors):
     if len(colors) < 7:
@@ -20,3 +23,8 @@ def invert(array, colorA, colorB):
         elif array[i] == colorB:
             array[i] = colorA
     return array
+
+def padForKanopeeCadre(list):
+    new_list = ([Color(0, 0, 0)]*CADRE_SIZE)
+    new_list.extend(list)
+    return new_list
