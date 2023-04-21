@@ -4,7 +4,7 @@ from rpi_ws281x import Color
 
 from ..utils.init_time import init_time
 from ..utils.rainbow import shift
-from ..utils.kanopeeUtils import map_letters
+from ..utils.kanopeeUtils import map_letters, padForKanopeeCadre
 
 
 def one_by_one(
@@ -23,7 +23,7 @@ def one_by_one(
     ]
 
     while time_left() > 0 or infinite:
-        strip.setArrayColor(list(reversed(map_letters(colors))))
+        strip.setArrayColor(padForKanopeeCadre(list(reversed(map_letters(colors)))))
         strip.show()
         time.sleep(wait_ms / 1000)
         shift(colors)

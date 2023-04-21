@@ -3,7 +3,7 @@ import time
 from rpi_ws281x import Color
 
 from ..utils.init_time import init_time
-from ..utils.kanopeeUtils import map_letters
+from ..utils.kanopeeUtils import map_letters, padForKanopeeCadre
 
 
 def frigo(
@@ -30,7 +30,7 @@ def frigo(
 
     while time_left() > 0 or infinite:
         for step in pattern:
-            strip.setArrayColor(map_letters(multiply(color_array, step, off_color)))
+            strip.setArrayColor(padForKanopeeCadre(map_letters(multiply(color_array, step, off_color))))
             strip.show()
             time.sleep(wait_ms / 1000)
 
