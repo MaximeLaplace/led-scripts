@@ -48,6 +48,8 @@ export const SegmentsToUse = () => {
             >
               <ToggleButton value="top">Top segments</ToggleButton>
               <ToggleButton value="all">All segments</ToggleButton>
+              <ToggleButton value="kano">Kanopée</ToggleButton>
+              <ToggleButton value="kano_c">Kanopée cadre</ToggleButton>
             </ToggleButtonGroup>
           </Grid>
         ) : (
