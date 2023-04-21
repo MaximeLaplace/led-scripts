@@ -12,6 +12,8 @@ def one_by_one(
 ):
     time_left = init_time(duration_s)
 
+    length = strip.numPixels()
+
     colors = [
         Color(*color),
         Color(0, 0, 0),
@@ -23,7 +25,11 @@ def one_by_one(
     ]
 
     while time_left() > 0 or infinite:
-        strip.setArrayColor(padForKanopeeCadre(map_letters(list(reversed(colors)))))
+        if length > 41:
+            color_array = padForKanopeeCadre(map_letters(list(reversed(colors))))
+        else:
+            color_array = map_letters(list(reversed(colors)))
+        strip.setArrayColor(color_array)
         strip.show()
         time.sleep(wait_ms / 1000)
         shift(colors)
