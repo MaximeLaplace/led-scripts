@@ -23,7 +23,7 @@ def one_by_one(
     ]
 
     while time_left() > 0 or infinite:
-        strip.setArrayColor(padForKanopeeCadre(list(reversed(map_letters(colors)))))
+        strip.setArrayColor(padForKanopeeCadre(list(map_letters(reversed(colors)))))
         strip.show()
         time.sleep(wait_ms / 1000)
         shift(colors)
