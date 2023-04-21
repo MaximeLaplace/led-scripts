@@ -149,7 +149,7 @@ def _generate_strip(segments: tuple[int] = (0, 1, 2, 3, 4, 5, 6, 7)):
 
 
 def _generate_kanopee_strip():
-    segments_lettres = (1, 3, 5, 7, 9, 11, 13, 15, 17)
+    segments_lettres = (1, 3, 5, 7, 9, 11, 13, 15, 17, 19)
 
     strip = PixelStripSelected(
         segments_lettres,
@@ -175,7 +175,7 @@ def _generate_kanopee_cadre_strip():
         ]
     )
 
-    segments_interessants = (0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
+    segments_interessants = (0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22)
 
     strip = PixelStripSelected(
         segments_interessants,

@@ -1,4 +1,4 @@
-KANOPEE_LETTERS_SIZES = [5, 6, 6, 6, 4, 6, 6]
+KANOPEE_LETTERS_SIZES = [5, 6, 6, 6, 5, 6, 6]
 
 def map_letters(colors):
     if len(colors) < 7:
@@ -9,6 +9,7 @@ def map_letters(colors):
     final_array = []
     for i in range(7):
         final_array.extend([new_colors[i]]*KANOPEE_LETTERS_SIZES[i])
+    final_array.append(new_colors[4])
     
     return final_array
 
