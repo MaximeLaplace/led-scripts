@@ -2,9 +2,8 @@ import inquirer
 
 from config import (
     BREAKPOINTS,
-    KANOPEE_BREAKPOINTS,
     CADRE_BREAKPOINTS,
-    TAILLE_BUFFER_KANOPEE,
+    KANOPEE_BREAKPOINTS,
     LED_BRIGHTNESS,
     LED_CHANNEL,
     LED_COUNT,
@@ -12,6 +11,7 @@ from config import (
     LED_FREQ_HZ,
     LED_INVERT,
     LED_PIN,
+    TAILLE_BUFFER_KANOPEE,
 )
 from rpi_ws281x import PixelStrip
 
@@ -59,14 +59,17 @@ class PixelSegment:
 
         self.setArrayColor(self._colors)
 
+
 class PixelStripWithSegments(PixelStrip):
-    def __init__(self, breakpoints=BREAKPOINTS,*args, **kwargs):
+    def __init__(self, breakpoints=BREAKPOINTS, *args, **kwargs):
         super().__init__(*args, *kwargs)
 
         self.breakpoints = breakpoints
         self.segments = []
-        for i in range(len(breakpoints)-1):
-            self.segments.append(PixelSegment(super(), breakpoints[i], breakpoints[i+1]))
+        for i in range(len(self.breakpoints) - 1):
+            self.segments.append(
+                PixelSegment(super(), self.breakpoints[i], self.breakpoints[i + 1])
+            )
 
     def get_segment_from_index(self, index: int):
         segment_index = -1
@@ -131,6 +134,7 @@ def _generate_strip(segments: tuple[int] = (0, 1, 2, 3, 4, 5, 6, 7)):
     if segments is not None:
         strip = PixelStripSelected(
             segments,
+            BREAKPOINTS,
             LED_COUNT,
             LED_PIN,
             LED_FREQ_HZ,
@@ -142,6 +146,7 @@ def _generate_strip(segments: tuple[int] = (0, 1, 2, 3, 4, 5, 6, 7)):
 
     strip.begin()
     return strip
+
 
 def _generate_kanopee_strip():
     segments_lettres = (1, 3, 5, 7, 9, 11, 13, 15, 17)
@@ -155,14 +160,20 @@ def _generate_kanopee_strip():
         LED_DMA,
         LED_INVERT,
         LED_BRIGHTNESS,
-        LED_CHANNEL
+        LED_CHANNEL,
     )
     strip.begin()
     return strip
 
+
 def _generate_kanopee_cadre_strip():
     new_breakpoints = CADRE_BREAKPOINTS
-    new_breakpoints.extend([p + CADRE_BREAKPOINTS[-1] - (13 - TAILLE_BUFFER_KANOPEE) for p in KANOPEE_BREAKPOINTS[1:]])
+    new_breakpoints.extend(
+        [
+            p + CADRE_BREAKPOINTS[-1] - (13 - TAILLE_BUFFER_KANOPEE)
+            for p in KANOPEE_BREAKPOINTS[1:]
+        ]
+    )
 
     segments_interessants = (0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
 
@@ -175,10 +186,11 @@ def _generate_kanopee_cadre_strip():
         LED_DMA,
         LED_INVERT,
         LED_BRIGHTNESS,
-        LED_CHANNEL
+        LED_CHANNEL,
     )
     strip.begin()
     return strip
+
 
 UPPER_LED = "Uniquement le carré de LED du haut"
 ALL_LED = "Toutes les LED"
@@ -208,10 +220,10 @@ def create_strip(choice: str = None):
 
     if led_to_address == UPPER_LED:
         return _generate_strip((1, 2, 5, 6))
-    
+
     if led_to_address == KANOPEE:
         return _generate_kanopee_strip()
-    
+
     if led_to_address == KANOPEE_CADRE:
         return _generate_kanopee_cadre_strip()
 
