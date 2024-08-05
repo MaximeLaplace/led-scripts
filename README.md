@@ -1,11 +1,14 @@
 # led-scripts
 
 A small project I conducted with my roommates in my last year of studies: controlling the LED strips we installed in our living room from a web app on your phone.
+
 We did not take the time to deploy the webapp, so we just served it on local network with a Raspberry Pi.
 
 Repo has multiple folders:
 - A crappy web app made with **React** for the Frontend and **Flask** for the backend
 - A cool interface of the LED library in Python
+- A mock of the LED strips to emulate the LEDs in your terminal
+- A quick telegram bot for... reasons
 
 How it works:
 - A single **Raspberry Pi** is responsible of controlling the LEDs and running the **Flask** server
